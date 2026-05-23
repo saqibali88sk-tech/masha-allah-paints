@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Masha Allah Paint Store</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #C0392B;
+    --primary-dark: #8e1f16;
+    --accent: #F39C12;
+    --accent2: #27AE60;
+    --accent3: #2980B9;
+    --dark: #1a1a1a;
+    --light: #fdf8f4;
+    --white: #ffffff;
+    --gray: #f5f0ea;
+    --text-muted: #7a6f65;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--light);
+    color: var(--dark);
+    overflow-x: hidden;
+  }
+
+  /* ───── NAV ───── */
+  nav {
+    position: fixed; top: 0; width: 100%; z-index: 999;
+    background: rgba(26,26,26,0.96);
+    backdrop-filter: blur(12px);
+    padding: 0 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 68px;
+    border-bottom: 2px solid var(--primary);
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    color: var(--white);
+    font-size: 1.3rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+  }
+  .nav-logo span { color: var(--accent); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    color: #ccc; text-decoration: none; font-size: 0.9rem;
+    font-weight: 400; letter-spacing: 0.5px;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+  .nav-cta {
+    background: var(--primary); color: white;
+    border: none; padding: 0.5rem 1.4rem;
+    border-radius: 4px; font-size: 0.88rem;
+    font-family: 'DM Sans', sans-serif;
+    cursor: pointer; font-weight: 500;
+    transition: background 0.2s;
+  }
+  .nav-cta:hover { background: var(--primary-dark); }
+
+  /* ───── PAGES ───── */
+  .page { display: none; }
+  .page.active { display: block; }
+
+  /* ───── HERO ───── */
+  #hero-page {
+    min-height: 100vh;
+    background: var(--dark);
+    padding-top: 68px;
+  }
+  .hero-section {
+    min-height: calc(100vh - 68px);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-paint-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse at 70% 30%, rgba(192,57,43,0.18) 0%, transparent 60%),
+      radial-gradient(ellipse at 30% 80%, rgba(243,156,18,0.12) 0%, transparent 50%);
+  }
+  .hero-left {
+    display: flex; flex-direction: column;
+    justify-content: center;
+    padding: 5rem 3rem 4rem 4rem;
+    position: relative; z-index: 2;
+  }
+  .hero-tag {
+    display: inline-block;
+    background: var(--primary);
+    color: white; font-size: 0.75rem;
+    font-weight: 500; letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 0.35rem 1rem; border-radius: 2px;
+    margin-bottom: 1.5rem; width: fit-content;
+  }
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.8rem, 5vw, 4.5rem);
+    color: var(--white);
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+  }
+  .hero-title .highlight { color: var(--accent); }
+  .hero-desc {
+    color: #aaa; font-size: 1rem;
+    line-height: 1.8; max-width: 420px;
+    margin-bottom: 2.5rem;
+  }
+  .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--primary); color: white;
+    border: none; padding: 0.85rem 2rem;
+    border-radius: 4px; font-size: 0.95rem;
+    font-family: 'DM Sans', sans-serif;
+    cursor: pointer; font-weight: 500;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .btn-primary:hover { background: var(--primary-dark); transform: translateY(-1px); }
+  .btn-outline {
+    background: transparent; color: var(--white);
+    border: 1.5px solid rgba(255,255,255,0.3);
+    padding: 0.85rem 2rem; border-radius: 4px;
+    font-size: 0.95rem; font-family: 'DM Sans', sans-serif;
+    cursor: pointer; font-weight: 400;
+    transition: border-color 0.2s, transform 0.15s;
+  }
+  .btn-outline:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-1px); }
+  .hero-stats {
+    display: flex; gap: 2.5rem; margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255,255,255,0.08);
+  }
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem; color: var(--accent);
+    font-weight: 700;
+  }
+  .stat-label { font-size: 0.8rem; color: #777; margin-top: 2px; }
+
+  .hero-right {
+    display: flex; align-items: center; justify-content: center;
+    position: relative; z-index: 2; padding: 3rem 2rem;
+  }
+  .paint-canvas {
+    width: 380px; height: 380px;
+    position: relative;
+  }
+  .paint-circle {
+    position: absolute; border-radius: 50%;
+    animation: float 6s ease-in-out infinite;
+  }
+  .pc1 { width: 300px; height: 300px; top: 40px; left: 40px;
+    background: conic-gradient(from 0deg, #C0392B, #F39C12, #27AE60, #2980B9, #8E44AD, #C0392B);
+    animation-delay: 0s; }
+  .pc2 { width: 200px; height: 200px; top: 90px; left: 90px;
+    background: var(--dark); }
+  .pc3 { width: 120px; height: 120px; top: 130px; left: 130px;
+    background: conic-gradient(from 90deg, #F39C12, #C0392B, #F39C12);
+    animation-delay: -2s; }
+  .pc-center { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+    font-family: 'Playfair Display', serif; color: white; font-size: 1.1rem;
+    font-weight: 700; text-align: center; line-height: 1.3; z-index: 2; }
+  .paint-dots {
+    position: absolute;
+    width: 12px; height: 12px; border-radius: 50%;
+    animation: float 4s ease-in-out infinite;
+  }
+  .pd1 { top: 10px; left: 10px; background: var(--accent); width:16px;height:16px; animation-delay:-1s; }
+  .pd2 { top: 20px; right: 20px; background: var(--accent2); width:10px;height:10px; animation-delay:-3s; }
+  .pd3 { bottom: 30px; left: 30px; background: var(--accent3); width:14px;height:14px; animation-delay:-2s; }
+  .pd4 { bottom: 10px; right: 10px; background: #8E44AD; width:18px;height:18px; animation-delay:-0.5s; }
+
+  @keyframes float {
+    0%,100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-12px) rotate(5deg); }
+  }
+
+  /* Features strip */
+  .features-strip {
+    background: var(--primary);
+    padding: 1.2rem 4rem;
+    display: flex; gap: 3rem;
+    align-items: center; justify-content: center;
+    flex-wrap: wrap;
+  }
+  .feat-item { color: white; font-size: 0.88rem; display: flex; align-items: center; gap: 0.5rem; }
+  .feat-icon { font-size: 1.1rem; }
+
+  /* About strip */
+  .about-strip {
+    background: var(--gray); padding: 5rem 4rem;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;
+    align-items: center;
+  }
+  .about-label {
+    font-size: 0.75rem; font-weight: 500; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--primary); margin-bottom: 1rem;
+  }
+  .about-title {
+    font-family: 'Playfair Display', serif; font-size: 2rem;
+    line-height: 1.3; margin-bottom: 1.2rem;
+  }
+  .about-text { color: var(--text-muted); line-height: 1.8; font-size: 0.95rem; }
+  .color-swatches { display: flex; gap: 0.8rem; flex-wrap: wrap; margin-top: 1.5rem; }
+  .swatch {
+    width: 44px; height: 44px; border-radius: 50%;
+    cursor: pointer; transition: transform 0.2s, box-shadow 0.2s;
+    border: 3px solid white;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  }
+  .swatch:hover { transform: scale(1.15); box-shadow: 0 4px 16px rgba(0,0,0,0.25); }
+
+  /* ───── PRODUCTS PAGE ───── */
+  #products-page { padding-top: 68px; min-height: 100vh; background: var(--light); }
+  .page-hero {
+    background: var(--dark); padding: 4rem;
+    text-align: center;
+  }
+  .page-hero h1 {
+    font-family: 'Playfair Display', serif;
+    color: white; font-size: 2.5rem; margin-bottom: 0.5rem;
+  }
+  .page-hero p { color: #888; font-size: 1rem; }
+  .products-section { padding: 4rem; }
+  .filter-bar {
+    display: flex; gap: 0.8rem; flex-wrap: wrap;
+    margin-bottom: 2.5rem;
+  }
+  .filter-btn {
+    padding: 0.5rem 1.2rem; border-radius: 999px;
+    border: 1.5px solid var(--primary); background: transparent;
+    color: var(--primary); font-size: 0.85rem;
+    cursor: pointer; font-family: 'DM Sans', sans-serif;
+    transition: all 0.2s;
+  }
+  .filter-btn.active, .filter-btn:hover {
+    background: var(--primary); color: white;
+  }
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1.5rem;
+  }
+  .product-card {
+    background: white; border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid rgba(0,0,0,0.06);
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+  }
+  .product-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.1); }
+  .product-img {
+    height: 180px; display: flex; align-items: center;
+    justify-content: center; font-size: 3.5rem;
+    position: relative; overflow: hidden;
+  }
+  .product-badge {
+    position: absolute; top: 10px; right: 10px;
+    background: var(--primary); color: white;
+    font-size: 0.7rem; font-weight: 500;
+    padding: 0.2rem 0.6rem; border-radius: 3px;
+    letter-spacing: 0.5px;
+  }
+  .product-info { padding: 1.2rem; }
+  .product-name { font-weight: 500; font-size: 0.95rem; margin-bottom: 0.3rem; }
+  .product-brand { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.8rem; }
+  .product-footer { display: flex; align-items: center; justify-content: space-between; margin-top: 0.8rem; }
+  .product-price { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--primary); font-weight: 700; }
+  .add-btn {
+    background: var(--primary); color: white;
+    border: none; padding: 0.4rem 0.9rem;
+    border-radius: 4px; font-size: 0.8rem;
+    cursor: pointer; font-family: 'DM Sans', sans-serif;
+    transition: background 0.2s;
+  }
+  .add-btn:hover { background: var(--primary-dark); }
+
+  /* ───── CONTACT PAGE ───── */
+  #contact-page { padding-top: 68px; min-height: 100vh; background: var(--light); }
+  .contact-grid {
+    display: grid; grid-template-columns: 1fr 1.4fr;
+    gap: 0; min-height: calc(100vh - 68px - 80px);
+  }
+  .contact-left {
+    background: var(--dark); padding: 4rem 3rem;
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  .contact-left h2 {
+    font-family: 'Playfair Display', serif;
+    color: white; font-size: 2rem; margin-bottom: 1rem;
+  }
+  .contact-left p { color: #888; line-height: 1.8; margin-bottom: 2.5rem; font-size: 0.95rem; }
+  .contact-info-item {
+    display: flex; gap: 1rem; margin-bottom: 1.5rem; align-items: flex-start;
+  }
+  .ci-icon {
+    width: 40px; height: 40px; border-radius: 8px;
+    background: rgba(192,57,43,0.2);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem; flex-shrink: 0;
+  }
+  .ci-label { font-size: 0.78rem; color: #666; margin-bottom: 2px; }
+  .ci-value { color: white; font-size: 0.92rem; }
+  .contact-right { background: white; padding: 4rem 3rem; display: flex; flex-direction: column; justify-content: center; }
+  .contact-right h2 { font-family: 'Playfair Display', serif; font-size: 1.8rem; margin-bottom: 0.5rem; }
+  .contact-right p { color: var(--text-muted); margin-bottom: 2rem; font-size: 0.9rem; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+  .form-group { margin-bottom: 1rem; }
+  .form-group label { display: block; font-size: 0.82rem; font-weight: 500; margin-bottom: 0.4rem; color: #444; }
+  .form-group input, .form-group textarea, .form-group select {
+    width: 100%; padding: 0.75rem 1rem;
+    border: 1.5px solid #e0dbd5; border-radius: 6px;
+    font-family: 'DM Sans', sans-serif; font-size: 0.9rem;
+    color: var(--dark); background: var(--light);
+    transition: border-color 0.2s; outline: none;
+  }
+  .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+    border-color: var(--primary);
+  }
+  .form-group textarea { resize: vertical; min-height: 110px; }
+  .submit-btn {
+    width: 100%; background: var(--primary); color: white;
+    border: none; padding: 0.9rem; border-radius: 6px;
+    font-size: 1rem; font-family: 'DM Sans', sans-serif;
+    font-weight: 500; cursor: pointer; transition: background 0.2s, transform 0.15s;
+    margin-top: 0.5rem;
+  }
+  .submit-btn:hover { background: var(--primary-dark); transform: translateY(-1px); }
+  .success-msg {
+    display: none; background: #d4edda; color: #155724;
+    border: 1px solid #c3e6cb; border-radius: 6px;
+    padding: 1rem; margin-top: 1rem; font-size: 0.9rem; text-align: center;
+  }
+
+  /* ───── LOGIN PAGE ───── */
+  #login-page {
+    padding-top: 68px; min-height: 100vh;
+    background: var(--dark);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .login-wrap {
+    display: grid; grid-template-columns: 1fr 1fr;
+    max-width: 860px; width: 90%; min-height: 500px;
+    border-radius: 16px; overflow: hidden;
+    box-shadow: 0 32px 80px rgba(0,0,0,0.4);
+  }
+  .login-left {
+    background: var(--primary);
+    padding: 3rem; display: flex; flex-direction: column;
+    justify-content: center; align-items: center; text-align: center;
+  }
+  .login-left h2 {
+    font-family: 'Playfair Display', serif;
+    color: white; font-size: 1.8rem; margin-bottom: 1rem;
+  }
+  .login-left p { color: rgba(255,255,255,0.75); font-size: 0.9rem; line-height: 1.7; margin-bottom: 2rem; }
+  .login-logo-big {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem; color: white; margin-bottom: 1.5rem;
+  }
+  .login-logo-big span { color: var(--accent); }
+  .paint-stripes {
+    display: flex; gap: 6px; margin-top: 1.5rem;
+  }
+  .stripe {
+    height: 6px; border-radius: 3px; flex: 1;
+  }
+  .login-right {
+    background: white; padding: 3rem;
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  .login-right h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem; margin-bottom: 0.4rem;
+  }
+  .login-right .sub { color: var(--text-muted); font-size: 0.88rem; margin-bottom: 2rem; }
+  .tabs { display: flex; gap: 0; margin-bottom: 2rem; border: 1.5px solid #e0dbd5; border-radius: 6px; overflow: hidden; }
+  .tab-btn {
+    flex: 1; padding: 0.65rem;
+    background: transparent; border: none;
+    font-family: 'DM Sans', sans-serif; font-size: 0.88rem;
+    cursor: pointer; transition: all 0.2s; font-weight: 400;
+    color: var(--text-muted);
+  }
+  .tab-btn.active { background: var(--primary); color: white; font-weight: 500; }
+  .login-form .form-group { margin-bottom: 1rem; }
+  .login-form .form-group label { display: block; font-size: 0.82rem; font-weight: 500; margin-bottom: 0.4rem; color: #444; }
+  .login-form .form-group input {
+    width: 100%; padding: 0.75rem 1rem;
+    border: 1.5px solid #e0dbd5; border-radius: 6px;
+    font-family: 'DM Sans', sans-serif; font-size: 0.9rem;
+    outline: none; transition: border-color 0.2s; background: var(--light);
+  }
+  .login-form .form-group input:focus { border-color: var(--primary); }
+  .forgot { font-size: 0.8rem; color: var(--primary); text-align: right; margin-top: -0.5rem; margin-bottom: 1rem; cursor: pointer; text-decoration: underline; }
+  .login-btn {
+    width: 100%; background: var(--primary); color: white;
+    border: none; padding: 0.85rem; border-radius: 6px;
+    font-size: 0.95rem; font-family: 'DM Sans', sans-serif;
+    font-weight: 500; cursor: pointer; transition: background 0.2s;
+  }
+  .login-btn:hover { background: var(--primary-dark); }
+
+  /* ───── FOOTER ───── */
+  footer {
+    background: var(--dark); color: #666;
+    padding: 2rem 4rem; text-align: center;
+    font-size: 0.85rem;
+    border-top: 2px solid var(--primary);
+  }
+  footer span { color: var(--accent); }
+
+  /* ───── TOAST ───── */
+  .toast {
+    position: fixed; bottom: 2rem; right: 2rem;
+    background: var(--dark); color: white;
+    padding: 0.8rem 1.5rem; border-radius: 8px;
+    font-size: 0.9rem; border-left: 4px solid var(--accent2);
+    transform: translateY(80px); opacity: 0;
+    transition: all 0.3s; z-index: 9999;
+  }
+  .toast.show { transform: translateY(0); opacity: 1; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo" onclick="showPage('hero')">Masha<span>Allah</span> Paints</div>
+  <ul class="nav-links">
+    <li><a href="#" onclick="showPage('hero');return false;">Home</a></li>
+    <li><a href="#" onclick="showPage('products');return false;">Products</a></li>
+    <li><a href="#" onclick="showPage('contact');return false;">Contact</a></li>
+  </ul>
+  <button class="nav-cta" onclick="showPage('login')">Login / Sign Up</button>
+</nav>
+
+<!-- ═══════════ HOME PAGE ═══════════ -->
+<div id="hero-page" class="page active">
+
+  <section class="hero-section">
+    <div class="hero-paint-bg"></div>
+    <div class="hero-left">
+      <span class="hero-tag">Pakistan's Trusted Paint Store</span>
+      <h1 class="hero-title">
+        Color Your<br>World With<br><span class="highlight">Confidence</span>
+      </h1>
+      <p class="hero-desc">
+        Masha Allah Paint Store — ghar, dukaan, aur factory ke liye behtareen quality paints. Ek jagah har color, har brand, har zaroorat.
+      </p>
+      <div class="hero-btns">
+        <button class="btn-primary" onclick="showPage('products')">Browse Products</button>
+        <button class="btn-outline" onclick="showPage('contact')">Contact Us</button>
+      </div>
+      <div class="hero-stats">
+        <div>
+          <div class="stat-num">500+</div>
+          <div class="stat-label">Paint Colors</div>
+        </div>
+        <div>
+          <div class="stat-num">15+</div>
+          <div class="stat-label">Top Brands</div>
+        </div>
+        <div>
+          <div class="stat-num">10yr</div>
+          <div class="stat-label">Experience</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="paint-canvas">
+        <div class="paint-circle pc1"></div>
+        <div class="paint-circle pc2"></div>
+        <div class="paint-circle pc3"></div>
+        <div class="pc-center">Quality<br>Paints</div>
+        <div class="paint-dots pd1"></div>
+        <div class="paint-dots pd2"></div>
+        <div class="paint-dots pd3"></div>
+        <div class="paint-dots pd4"></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="features-strip">
+    <div class="feat-item"><span class="feat-icon">🚚</span> Free Home Delivery</div>
+    <div class="feat-item"><span class="feat-icon">🎨</span> Color Matching Service</div>
+    <div class="feat-item"><span class="feat-icon">✅</span> Original Brands Only</div>
+    <div class="feat-item"><span class="feat-icon">📞</span> Expert Advice</div>
+    <div class="feat-item"><span class="feat-icon">💰</span> Best Market Price</div>
+  </div>
+
+  <div class="about-strip">
+    <div>
+      <p class="about-label">About Us</p>
+      <h2 class="about-title">Muzaffargarh Ka Bharosa — Masha Allah Paints</h2>
+      <p class="about-text">
+        10 saalon se zyada waqt se hum Muzaffargarh aur aas paas ke ilaqon mein behtareen quality paints supply kar rahe hain. Hamare paas Berger, Nippon, ICI, Master, Dulux — sab bade brands available hain. Ghar se lekar industrial projects tak, har kaam ke liye sahi paint hum dete hain.
+      </p>
+      <div class="color-swatches">
+        <div class="swatch" style="background:#C0392B" title="Red"></div>
+        <div class="swatch" style="background:#F39C12" title="Yellow"></div>
+        <div class="swatch" style="background:#27AE60" title="Green"></div>
+        <div class="swatch" style="background:#2980B9" title="Blue"></div>
+        <div class="swatch" style="background:#8E44AD" title="Purple"></div>
+        <div class="swatch" style="background:#1ABC9C" title="Teal"></div>
+        <div class="swatch" style="background:#F5CBA7" title="Cream"></div>
+        <div class="swatch" style="background:#2C3E50" title="Navy"></div>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+      <div style="background:white;border-radius:10px;padding:1.5rem;border:1px solid rgba(0,0,0,0.06);">
+        <div style="font-family:'Playfair Display',serif;font-size:2rem;color:var(--primary);font-weight:700;">Berger</div>
+        <div style="font-size:0.8rem;color:var(--text-muted);margin-top:4px;">Premium quality</div>
+      </div>
+      <div style="background:white;border-radius:10px;padding:1.5rem;border:1px solid rgba(0,0,0,0.06);">
+        <div style="font-family:'Playfair Display',serif;font-size:2rem;color:var(--accent3);font-weight:700;">Nippon</div>
+        <div style="font-size:0.8rem;color:var(--text-muted);margin-top:4px;">Japanese standard</div>
+      </div>
+      <div style="background:white;border-radius:10px;padding:1.5rem;border:1px solid rgba(0,0,0,0.06);">
+        <div style="font-family:'Playfair Display',serif;font-size:2rem;color:var(--accent2);font-weight:700;">ICI</div>
+        <div style="font-size:0.8rem;color:var(--text-muted);margin-top:4px;">Trusted worldwide</div>
+      </div>
+      <div style="background:white;border-radius:10px;padding:1.5rem;border:1px solid rgba(0,0,0,0.06);">
+        <div style="font-family:'Playfair Display',serif;font-size:2rem;color:#8E44AD;font-weight:700;">Master</div>
+        <div style="font-size:0.8rem;color:var(--text-muted);margin-top:4px;">Local champion</div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2025 <span>Masha Allah Paint Store</span> — Muzaffargarh, Punjab, Pakistan. All rights reserved.
+  </footer>
+</div>
+
+<!-- ═══════════ PRODUCTS PAGE ═══════════ -->
+<div id="products-page" class="page">
+  <div class="page-hero">
+    <h1>Our Products</h1>
+    <p>Top brands, best prices — sab kuch ek jagah</p>
+  </div>
+  <div class="products-section">
+    <div class="filter-bar">
+      <button class="filter-btn active" onclick="filterProducts('all', this)">All Products</button>
+      <button class="filter-btn" onclick="filterProducts('interior', this)">Interior Paint</button>
+      <button class="filter-btn" onclick="filterProducts('exterior', this)">Exterior Paint</button>
+      <button class="filter-btn" onclick="filterProducts('primer', this)">Primer</button>
+      <button class="filter-btn" onclick="filterProducts('enamel', this)">Enamel</button>
+      <button class="filter-btn" onclick="filterProducts('tools', this)">Tools</button>
+    </div>
+    <div class="products-grid" id="productsGrid"></div>
+  </div>
+  <footer>
+    &copy; 2025 <span>Masha Allah Paint Store</span> — Muzaffargarh, Punjab, Pakistan. All rights reserved.
+  </footer>
+</div>
+
+<!-- ═══════════ CONTACT PAGE ═══════════ -->
+<div id="contact-page" class="page">
+  <div class="contact-grid">
+    <div class="contact-left">
+      <h2>Humse Raabta Karein</h2>
+      <p>Koi bhi sawaal ho — paint selection se lekar price tak — hum hamesha available hain.</p>
+      <div class="contact-info-item">
+        <div class="ci-icon">📍</div>
+        <div>
+          <div class="ci-label">Address</div>
+          <div class="ci-value">Main Bazar, Muzaffargarh,<br>Punjab, Pakistan</div>
+        </div>
+      </div>
+      <div class="contact-info-item">
+        <div class="ci-icon">📞</div>
+        <div>
+          <div class="ci-label">Phone / WhatsApp</div>
+          <div class="ci-value">+92 300 000 0000</div>
+        </div>
+      </div>
+      <div class="contact-info-item">
+        <div class="ci-icon">🕐</div>
+        <div>
+          <div class="ci-label">Opening Hours</div>
+          <div class="ci-value">Mon–Sat: 8am – 9pm<br>Sunday: 10am – 6pm</div>
+        </div>
+      </div>
+      <div class="contact-info-item">
+        <div class="ci-icon">📧</div>
+        <div>
+          <div class="ci-label">Email</div>
+          <div class="ci-value">info@mashallahpaints.pk</div>
+        </div>
+      </div>
+    </div>
+    <div class="contact-right">
+      <h2>Message Bhejein</h2>
+      <p>Apna sawaal likhein — hum jald jawab denge</p>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Aap ka Naam</label>
+          <input type="text" placeholder="Jaise: Ali Hassan">
+        </div>
+        <div class="form-group">
+          <label>Phone Number</label>
+          <input type="text" placeholder="+92 300 ...">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Email (optional)</label>
+        <input type="email" placeholder="yourname@email.com">
+      </div>
+      <div class="form-group">
+        <label>Kya Chahiye?</label>
+        <select>
+          <option>Paint Selection Help</option>
+          <option>Price Inquiry</option>
+          <option>Bulk Order</option>
+          <option>Delivery Query</option>
+          <option>Complaint / Feedback</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Message</label>
+        <textarea placeholder="Apna sawaal ya zaroorat yahan likhein..."></textarea>
+      </div>
+      <button class="submit-btn" onclick="sendContactForm()">Message Bhejein ✉️</button>
+      <div class="success-msg" id="successMsg">✅ Shukriya! Aap ka message mil gaya. Hum jald raabta karenge.</div>
+    </div>
+  </div>
+  <footer>
+    &copy; 2025 <span>Masha Allah Paint Store</span> — Muzaffargarh, Punjab, Pakistan. All rights reserved.
+  </footer>
+</div>
+
+<!-- ═══════════ LOGIN PAGE ═══════════ -->
+<div id="login-page" class="page">
+  <div class="login-wrap">
+    <div class="login-left">
+      <div class="login-logo-big">M<span>A</span></div>
+      <h2>Masha Allah Paint Store</h2>
+      <p>Account bana kar exclusive deals, order history aur color tips pao!</p>
+      <div class="paint-stripes">
+        <div class="stripe" style="background:#C0392B"></div>
+        <div class="stripe" style="background:#F39C12"></div>
+        <div class="stripe" style="background:#27AE60"></div>
+        <div class="stripe" style="background:#2980B9"></div>
+        <div class="stripe" style="background:#8E44AD"></div>
+      </div>
+    </div>
+    <div class="login-right">
+      <h3>Welcome Back!</h3>
+      <p class="sub">Apna account access karein</p>
+      <div class="tabs">
+        <button class="tab-btn active" id="loginTab" onclick="switchTab('login')">Login</button>
+        <button class="tab-btn" id="signupTab" onclick="switchTab('signup')">Sign Up</button>
+      </div>
+
+      <!-- Login Form -->
+      <div id="loginForm" class="login-form">
+        <div class="form-group">
+          <label>Phone / Email</label>
+          <input type="text" placeholder="0300-0000000 ya email">
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" placeholder="••••••••">
+        </div>
+        <div class="forgot">Password bhool gaye?</div>
+        <button class="login-btn" onclick="fakeLogin()">Login</button>
+      </div>
+
+      <!-- Signup Form -->
+      <div id="signupForm" class="login-form" style="display:none">
+        <div class="form-group">
+          <label>Poora Naam</label>
+          <input type="text" placeholder="Jaise: Muhammad Ali">
+        </div>
+        <div class="form-group">
+          <label>Phone Number</label>
+          <input type="text" placeholder="+92 300 0000000">
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" placeholder="Strong password likhein">
+        </div>
+        <button class="login-btn" onclick="fakeSignup()">Account Banao</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+const products = [
+  { name:"Berger WeatherCoat", brand:"Berger", price:"Rs. 2,800", cat:"exterior", emoji:"🏠", bg:"#EBF5FB", badge:"Best Seller" },
+  { name:"ICI Dulux Interior", brand:"ICI", price:"Rs. 2,200", cat:"interior", emoji:"🎨", bg:"#FDFEFE", badge:"" },
+  { name:"Nippon Weatherbond", brand:"Nippon", price:"Rs. 3,100", cat:"exterior", emoji:"🌦️", bg:"#EAF4FB", badge:"New" },
+  { name:"Master Wall Care", brand:"Master", price:"Rs. 1,600", cat:"interior", emoji:"🖌️", bg:"#F9F9F9", badge:"" },
+  { name:"Berger Primer Plus", brand:"Berger", price:"Rs. 1,200", cat:"primer", emoji:"🪣", bg:"#FEF9E7", badge:"" },
+  { name:"ICI Super Enamel", brand:"ICI", price:"Rs. 1,900", cat:"enamel", emoji:"✨", bg:"#F5EEF8", badge:"Popular" },
+  { name:"Nippon Paint Gloss", brand:"Nippon", price:"Rs. 2,500", cat:"enamel", emoji:"💎", bg:"#EAF7F4", badge:"" },
+  { name:"Master Anti-Fungal", brand:"Master", price:"Rs. 2,100", cat:"interior", emoji:"🛡️", bg:"#EAFAF1", badge:"Recommended" },
+  { name:"Paint Brush Set (5pc)", brand:"Tools", price:"Rs. 450", cat:"tools", emoji:"🖌️", bg:"#FDF2F8", badge:"" },
+  { name:"Roller Set Pro", brand:"Tools", price:"Rs. 650", cat:"tools", emoji:"🎢", bg:"#F4ECF7", badge:"" },
+  { name:"Wall Putty (5kg)", brand:"Berger", price:"Rs. 880", cat:"primer", emoji:"🪨", bg:"#F8F9FA", badge:"" },
+  { name:"Zinc Chromate Primer", brand:"Master", price:"Rs. 1,450", cat:"primer", emoji:"🔒", bg:"#FEF5E7", badge:"" },
+];
+
+let currentFilter = 'all';
+
+function renderProducts(filter) {
+  const grid = document.getElementById('productsGrid');
+  const filtered = filter === 'all' ? products : products.filter(p => p.cat === filter);
+  grid.innerHTML = filtered.map(p => `
+    <div class="product-card">
+      <div class="product-img" style="background:${p.bg};">
+        <span style="font-size:3.5rem">${p.emoji}</span>
+        ${p.badge ? `<span class="product-badge">${p.badge}</span>` : ''}
+      </div>
+      <div class="product-info">
+        <div class="product-name">${p.name}</div>
+        <div class="product-brand">${p.brand}</div>
+        <div class="product-footer">
+          <span class="product-price">${p.price}</span>
+          <button class="add-btn" onclick="addToCart('${p.name}')">+ Cart</button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function filterProducts(cat, btn) {
+  currentFilter = cat;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderProducts(cat);
+}
+
+function addToCart(name) { showToast('🛒 "' + name + '" cart mein add ho gaya!'); }
+
+function showPage(page) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById(page + '-page').classList.add('active');
+  window.scrollTo(0, 0);
+  if (page === 'products') renderProducts(currentFilter);
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+function sendContactForm() {
+  document.getElementById('successMsg').style.display = 'block';
+  showToast('✅ Message bhej diya gaya!');
+}
+
+function switchTab(tab) {
+  document.getElementById('loginForm').style.display = tab === 'login' ? 'block' : 'none';
+  document.getElementById('signupForm').style.display = tab === 'signup' ? 'block' : 'none';
+  document.getElementById('loginTab').classList.toggle('active', tab === 'login');
+  document.getElementById('signupTab').classList.toggle('active', tab === 'signup');
+}
+
+function fakeLogin() { showToast('👋 Welcome back! Login ho gaye.'); setTimeout(() => showPage('hero'), 1000); }
+function fakeSignup() { showToast('🎉 Account ban gaya! Welcome to Masha Allah Paints!'); setTimeout(() => showPage('hero'), 1000); }
+
+renderProducts('all');
+</script>
+</body>
+</html>
