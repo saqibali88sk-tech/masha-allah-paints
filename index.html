@@ -550,11 +550,31 @@
   <div class="products-section">
     <div class="filter-bar">
       <button class="filter-btn active" onclick="filterProducts('all', this)">All Products</button>
-      <button class="filter-btn" onclick="filterProducts('interior', this)">Interior Paint</button>
-      <button class="filter-btn" onclick="filterProducts('exterior', this)">Exterior Paint</button>
-      <button class="filter-btn" onclick="filterProducts('primer', this)">Primer</button>
+      <button class="filter-btn" onclick="filterProducts('interior', this)">Interior</button>
+      <button class="filter-btn" onclick="filterProducts('exterior', this)">Exterior</button>
       <button class="filter-btn" onclick="filterProducts('enamel', this)">Enamel</button>
-      <button class="filter-btn" onclick="filterProducts('tools', this)">Tools</button>
+      <button class="filter-btn" onclick="filterProducts('primer', this)">Primer & Sealer</button>
+    </div>
+    <!-- CART BAR -->
+    <div id="cart-bar" style="display:none;background:#1a1a1a;color:white;padding:0.8rem 1.5rem;border-radius:10px;margin-bottom:1.5rem;display:none;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;">
+      <span style="font-size:0.95rem;">🛒 Cart: <span id="cart-count">0</span> items — Total: <span style="color:#F39C12;font-weight:600">Rs. <span id="cart-total">0</span></span></span>
+      <div style="display:flex;gap:8px;">
+        <button onclick="viewCart()" style="background:#F39C12;color:#1a1a1a;border:none;padding:0.4rem 1rem;border-radius:6px;font-weight:600;cursor:pointer;font-size:0.85rem;">View Cart</button>
+        <button onclick="orderWhatsApp()" style="background:#25D366;color:white;border:none;padding:0.4rem 1rem;border-radius:6px;font-weight:600;cursor:pointer;font-size:0.85rem;">Order on WhatsApp 📲</button>
+        <button onclick="clearCart()" style="background:transparent;color:#aaa;border:1px solid #444;padding:0.4rem 0.8rem;border-radius:6px;cursor:pointer;font-size:0.8rem;">Clear</button>
+      </div>
+    </div>
+    <!-- CART MODAL -->
+    <div id="cart-modal" style="display:none;background:white;border-radius:12px;border:1px solid #e0dbd5;padding:1.5rem;margin-bottom:1.5rem;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;">
+        <h3 style="font-family:'Playfair Display',serif;font-size:1.3rem;">Tumhara Cart</h3>
+        <button onclick="document.getElementById('cart-modal').style.display='none'" style="background:none;border:none;font-size:1.2rem;cursor:pointer;">✕</button>
+      </div>
+      <div id="cart-items-list"></div>
+      <div style="border-top:1px solid #e0dbd5;margin-top:1rem;padding-top:1rem;display:flex;justify-content:space-between;align-items:center;">
+        <span style="font-size:1rem;font-weight:500;">Total: <span style="color:#C0392B;font-family:'Playfair Display',serif;">Rs. <span id="cart-total-modal">0</span></span></span>
+        <button onclick="orderWhatsApp()" style="background:#25D366;color:white;border:none;padding:0.6rem 1.2rem;border-radius:6px;font-weight:600;cursor:pointer;">Order on WhatsApp 📲</button>
+      </div>
     </div>
     <div class="products-grid" id="productsGrid"></div>
   </div>
@@ -708,21 +728,21 @@
 
 <script>
 const products = [
-  { name:"Berger WeatherCoat", brand:"Berger", price:"Rs. 2,800", cat:"exterior", emoji:"🏠", bg:"#EBF5FB", badge:"Best Seller" },
-  { name:"ICI Dulux Interior", brand:"ICI", price:"Rs. 2,200", cat:"interior", emoji:"🎨", bg:"#FDFEFE", badge:"" },
-  { name:"Nippon Weatherbond", brand:"Nippon", price:"Rs. 3,100", cat:"exterior", emoji:"🌦️", bg:"#EAF4FB", badge:"New" },
-  { name:"Master Wall Care", brand:"Master", price:"Rs. 1,600", cat:"interior", emoji:"🖌️", bg:"#F9F9F9", badge:"" },
-  { name:"Berger Primer Plus", brand:"Berger", price:"Rs. 1,200", cat:"primer", emoji:"🪣", bg:"#FEF9E7", badge:"" },
-  { name:"ICI Super Enamel", brand:"ICI", price:"Rs. 1,900", cat:"enamel", emoji:"✨", bg:"#F5EEF8", badge:"Popular" },
-  { name:"Nippon Paint Gloss", brand:"Nippon", price:"Rs. 2,500", cat:"enamel", emoji:"💎", bg:"#EAF7F4", badge:"" },
-  { name:"Master Anti-Fungal", brand:"Master", price:"Rs. 2,100", cat:"interior", emoji:"🛡️", bg:"#EAFAF1", badge:"Recommended" },
-  { name:"Paint Brush Set (5pc)", brand:"Tools", price:"Rs. 450", cat:"tools", emoji:"🖌️", bg:"#FDF2F8", badge:"" },
-  { name:"Roller Set Pro", brand:"Tools", price:"Rs. 650", cat:"tools", emoji:"🎢", bg:"#F4ECF7", badge:"" },
-  { name:"Wall Putty (5kg)", brand:"Berger", price:"Rs. 880", cat:"primer", emoji:"🪨", bg:"#F8F9FA", badge:"" },
-  { name:"Zinc Chromate Primer", brand:"Master", price:"Rs. 1,450", cat:"primer", emoji:"🔒", bg:"#FEF5E7", badge:"" },
+  { name:"Aqueous Matt Finish", brand:"Gobis", price:"Rs. 850 – 2,250", priceNum:1550, cat:"interior", emoji:"🎨", bg:"#EAF3DE", badge:"Popular", desc:"Washable matte finish" },
+  { name:"Plastic Emulsion", brand:"Gobis", price:"Rs. 600 – 8,900", priceNum:1800, cat:"interior", emoji:"🖌️", bg:"#F0F8FF", badge:"", desc:"High opacity interior" },
+  { name:"Silk Sheen Vinyl Emulsion", brand:"Gobis", price:"Rs. 600 – 8,900", priceNum:2200, cat:"interior", emoji:"✨", bg:"#FEF9E7", badge:"Best Seller", desc:"Smooth silky finish" },
+  { name:"Armour Distemper", brand:"Gobis", price:"Rs. 850 – 2,250", priceNum:950, cat:"interior", emoji:"🏠", bg:"#F5F0EA", badge:"Economical", desc:"Budget interior coat" },
+  { name:"Weather Protector", brand:"Gobis", price:"Rs. 1,080 – 16,800", priceNum:3500, cat:"exterior", emoji:"🌦️", bg:"#EBF5FB", badge:"Best Seller", desc:"Anti-fungal exterior" },
+  { name:"Gold Weather Guard", brand:"Gobis", price:"Rs. 1,080 – 16,800", priceNum:4200, cat:"exterior", emoji:"🥇", bg:"#FAEEDA", badge:"Premium", desc:"High performance exterior" },
+  { name:"Gloss Finish Enamel", brand:"Gobis", price:"Rs. 655 – 17,400", priceNum:1800, cat:"enamel", emoji:"💎", bg:"#F5EEF8", badge:"", desc:"Wood & metal gloss" },
+  { name:"Matt Finish Enamel", brand:"Gobis", price:"Rs. 655 – 17,400", priceNum:1700, cat:"enamel", emoji:"🖼️", bg:"#FAECE7", badge:"", desc:"Satin/matt enamel" },
+  { name:"Red Oxide Primer", brand:"Gobis", price:"Rs. 655 – 17,400", priceNum:1200, cat:"enamel", emoji:"🔩", bg:"#FCEBEB", badge:"Anti-rust", desc:"Metal rust protection" },
+  { name:"Wall Sealer / Primer", brand:"Gobis", price:"Rs. 850 – 2,250", priceNum:1100, cat:"primer", emoji:"🪣", bg:"#EAF7F4", badge:"", desc:"Water & oil based" },
+  { name:"Sona Lappi (Wall Putty)", brand:"Gobis", price:"Rs. 850 – 2,250", priceNum:900, cat:"primer", emoji:"🪨", bg:"#F8F9FA", badge:"", desc:"Crack filler & leveler" },
 ];
 
 let currentFilter = 'all';
+let cart = [];
 
 function renderProducts(filter) {
   const grid = document.getElementById('productsGrid');
@@ -735,10 +755,13 @@ function renderProducts(filter) {
       </div>
       <div class="product-info">
         <div class="product-name">${p.name}</div>
-        <div class="product-brand">${p.brand}</div>
+        <div class="product-brand" style="display:flex;justify-content:space-between;align-items:center;">
+          <span>${p.brand}</span>
+          <span style="font-size:0.75rem;color:#888;">${p.desc}</span>
+        </div>
         <div class="product-footer">
           <span class="product-price">${p.price}</span>
-          <button class="add-btn" onclick="addToCart('${p.name}')">+ Cart</button>
+          <button class="add-btn" onclick="addToCart('${p.name}', ${p.priceNum})">+ Cart</button>
         </div>
       </div>
     </div>
@@ -752,7 +775,65 @@ function filterProducts(cat, btn) {
   renderProducts(cat);
 }
 
-function addToCart(name) { showToast('🛒 "' + name + '" cart mein add ho gaya!'); }
+function addToCart(name, price) {
+  const existing = cart.find(i => i.name === name);
+  if (existing) { existing.qty++; } else { cart.push({ name, price, qty: 1 }); }
+  updateCartUI();
+  showToast('🛒 "' + name + '" cart mein add ho gaya!');
+}
+
+function updateCartUI() {
+  const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
+  const count = cart.reduce((s, i) => s + i.qty, 0);
+  document.getElementById('cart-count').textContent = count;
+  document.getElementById('cart-total').textContent = total.toLocaleString();
+  document.getElementById('cart-total-modal').textContent = total.toLocaleString();
+  const bar = document.getElementById('cart-bar');
+  bar.style.display = count > 0 ? 'flex' : 'none';
+  renderCartItems();
+}
+
+function renderCartItems() {
+  const list = document.getElementById('cart-items-list');
+  if (!list) return;
+  if (cart.length === 0) { list.innerHTML = '<p style="color:#888;font-size:0.9rem;">Cart khali hai</p>'; return; }
+  list.innerHTML = cart.map(i => `
+    <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid #f0ebe5;">
+      <span style="font-size:0.9rem;">${i.name}</span>
+      <div style="display:flex;align-items:center;gap:8px;">
+        <button onclick="changeQty('${i.name}',-1)" style="width:24px;height:24px;border-radius:50%;border:1px solid #ddd;background:white;cursor:pointer;font-size:0.9rem;">−</button>
+        <span style="font-size:0.9rem;font-weight:500;">${i.qty}</span>
+        <button onclick="changeQty('${i.name}',1)" style="width:24px;height:24px;border-radius:50%;border:1px solid #ddd;background:white;cursor:pointer;font-size:0.9rem;">+</button>
+        <span style="font-size:0.85rem;color:#C0392B;min-width:80px;text-align:right;">Rs. ${(i.price*i.qty).toLocaleString()}</span>
+      </div>
+    </div>
+  `).join('');
+}
+
+function changeQty(name, delta) {
+  const item = cart.find(i => i.name === name);
+  if (!item) return;
+  item.qty += delta;
+  if (item.qty <= 0) cart = cart.filter(i => i.name !== name);
+  updateCartUI();
+}
+
+function clearCart() { cart = []; updateCartUI(); document.getElementById('cart-modal').style.display='none'; }
+
+function viewCart() {
+  const modal = document.getElementById('cart-modal');
+  modal.style.display = modal.style.display === 'none' ? 'block' : 'none';
+  renderCartItems();
+}
+
+function orderWhatsApp() {
+  if (cart.length === 0) { showToast('Cart khali hai — pehle products add karo!'); return; }
+  const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
+  let msg = 'Assalam o Alaikum! Masha Allah Paint Store se order karna chahta hun:\n\n';
+  cart.forEach(i => { msg += `• ${i.name} x${i.qty} = Rs. ${(i.price*i.qty).toLocaleString()}\n`; });
+  msg += `\nTotal: Rs. ${total.toLocaleString()}\n\nPlease confirm karain. Shukriya!`;
+  window.open('https://wa.me/923024746351?text=' + encodeURIComponent(msg), '_blank');
+}
 
 function showPage(page) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
