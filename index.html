@@ -503,7 +503,7 @@
       <p class="about-label">About Us</p>
       <h2 class="about-title">Bakhri Uch Sharif Ka Bharosa — Masha Allah Paints</h2>
       <p class="about-text">
-        10 saalon se zyada waqt se hum Bakhri aur aas paas ke ilaqon mein behtareen quality paints supply kar rahe hain. Hamare paas Berger, Nippon, ICI, Master, Dulux — sab bade brands available hain. Ghar se lekar industrial projects tak, har kaam ke liye sahi paint hum dete hain.
+        10 saalon se zyada waqt se hum Bakhri aur aas paas ke ilaqon mein behtareen quality paints supply kar rahe hain. Hamare paas <strong>Gobis Paints</strong> ke tamam products available hain — Interior, Exterior, Enamel, Primer sab kuch. Ghar se lekar industrial projects tak, har kaam ke liye sahi paint hum dete hain.
       </p>
       <div class="color-swatches">
         <div class="swatch" style="background:#C0392B" title="Red"></div>
@@ -516,24 +516,133 @@
         <div class="swatch" style="background:#2C3E50" title="Navy"></div>
       </div>
     </div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
-      <div style="background:white;border-radius:10px;padding:1.5rem;border:1px solid rgba(0,0,0,0.06);">
-        <div style="font-family:'Playfair Display',serif;font-size:2rem;color:var(--primary);font-weight:700;">Berger</div>
-        <div style="font-size:0.8rem;color:var(--text-muted);margin-top:4px;">Premium quality</div>
+    <!-- Gobis Branding Card -->
+    <div style="background:linear-gradient(135deg,#1a1a1a 60%,#2d1a0e);border-radius:16px;padding:2.5rem;text-align:center;position:relative;overflow:hidden;">
+      <div style="position:absolute;top:-30px;right:-30px;width:120px;height:120px;border-radius:50%;background:rgba(192,57,43,0.15);"></div>
+      <div style="position:absolute;bottom:-20px;left:-20px;width:80px;height:80px;border-radius:50%;background:rgba(243,156,18,0.1);"></div>
+      <div style="font-size:0.75rem;letter-spacing:3px;text-transform:uppercase;color:#888;margin-bottom:1rem;">Authorized Dealer</div>
+      <div style="font-family:'Playfair Display',serif;font-size:3rem;font-weight:900;color:white;letter-spacing:2px;margin-bottom:0.3rem;">GOBIS</div>
+      <div style="font-size:0.85rem;color:#F39C12;letter-spacing:2px;margin-bottom:1.5rem;">PAINTS & COATINGS</div>
+      <div style="display:flex;justify-content:center;gap:6px;margin-bottom:1.5rem;">
+        <div style="height:4px;width:30px;border-radius:2px;background:#C0392B;"></div>
+        <div style="height:4px;width:30px;border-radius:2px;background:#F39C12;"></div>
+        <div style="height:4px;width:30px;border-radius:2px;background:#27AE60;"></div>
+        <div style="height:4px;width:30px;border-radius:2px;background:#2980B9;"></div>
       </div>
-      <div style="background:white;border-radius:10px;padding:1.5rem;border:1px solid rgba(0,0,0,0.06);">
-        <div style="font-family:'Playfair Display',serif;font-size:2rem;color:var(--accent3);font-weight:700;">Nippon</div>
-        <div style="font-size:0.8rem;color:var(--text-muted);margin-top:4px;">Japanese standard</div>
+      <div style="font-size:0.82rem;color:#aaa;line-height:1.7;">Premium quality paints<br>Pakistan mein trusted brand</div>
+      <button onclick="showPage('products')" style="margin-top:1.5rem;background:var(--primary);color:white;border:none;padding:0.7rem 1.8rem;border-radius:6px;font-size:0.9rem;cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:500;">Products Dekhein →</button>
+    </div>
+  </div>
+
+  <!-- FEATURED PRODUCTS ON HOME -->
+  <div style="padding:5rem 4rem;background:white;">
+    <div style="text-align:center;margin-bottom:3rem;">
+      <p style="font-size:0.75rem;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:var(--primary);margin-bottom:0.8rem;">Our Products</p>
+      <h2 style="font-family:'Playfair Display',serif;font-size:2.2rem;margin-bottom:0.8rem;">Gobis Ke Best Products</h2>
+      <p style="color:#7a6f65;font-size:0.95rem;max-width:500px;margin:0 auto;">Har zaroorat ke liye behtareen paint — ghar, dukaan, ya factory</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.2rem;margin-bottom:2rem;">
+
+      <div style="border-radius:12px;overflow:hidden;border:1px solid rgba(0,0,0,0.06);transition:transform 0.2s;" onmouseover="this.style.transform='translateY(-4px)'" onmouseout="this.style.transform='translateY(0)'">
+        <div style="background:#EAF3DE;height:140px;display:flex;align-items:center;justify-content:center;font-size:3rem;position:relative;">🎨
+          <span style="position:absolute;top:8px;right:8px;background:#C0392B;color:white;font-size:0.65rem;padding:2px 7px;border-radius:3px;font-weight:500;">Best Seller</span>
+        </div>
+        <div style="padding:1rem;">
+          <div style="font-weight:600;font-size:0.9rem;margin-bottom:3px;">Silk Sheen Vinyl Emulsion</div>
+          <div style="font-size:0.75rem;color:#888;margin-bottom:8px;">Gobis Paints</div>
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <span style="color:#C0392B;font-family:'Playfair Display',serif;font-weight:700;font-size:0.95rem;">Rs. 600–8,900</span>
+            <button onclick="showPage('products')" style="background:#C0392B;color:white;border:none;padding:4px 10px;border-radius:4px;font-size:0.75rem;cursor:pointer;">Order</button>
+          </div>
+        </div>
       </div>
-      <div style="background:white;border-radius:10px;padding:1.5rem;border:1px solid rgba(0,0,0,0.06);">
-        <div style="font-family:'Playfair Display',serif;font-size:2rem;color:var(--accent2);font-weight:700;">ICI</div>
-        <div style="font-size:0.8rem;color:var(--text-muted);margin-top:4px;">Trusted worldwide</div>
+
+      <div style="border-radius:12px;overflow:hidden;border:1px solid rgba(0,0,0,0.06);transition:transform 0.2s;" onmouseover="this.style.transform='translateY(-4px)'" onmouseout="this.style.transform='translateY(0)'">
+        <div style="background:#EBF5FB;height:140px;display:flex;align-items:center;justify-content:center;font-size:3rem;position:relative;">🌦️
+          <span style="position:absolute;top:8px;right:8px;background:#C0392B;color:white;font-size:0.65rem;padding:2px 7px;border-radius:3px;font-weight:500;">Popular</span>
+        </div>
+        <div style="padding:1rem;">
+          <div style="font-weight:600;font-size:0.9rem;margin-bottom:3px;">Weather Protector</div>
+          <div style="font-size:0.75rem;color:#888;margin-bottom:8px;">Gobis Paints</div>
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <span style="color:#C0392B;font-family:'Playfair Display',serif;font-weight:700;font-size:0.95rem;">Rs. 1,080–16,800</span>
+            <button onclick="showPage('products')" style="background:#C0392B;color:white;border:none;padding:4px 10px;border-radius:4px;font-size:0.75rem;cursor:pointer;">Order</button>
+          </div>
+        </div>
       </div>
-      <div style="background:white;border-radius:10px;padding:1.5rem;border:1px solid rgba(0,0,0,0.06);">
-        <div style="font-family:'Playfair Display',serif;font-size:2rem;color:#8E44AD;font-weight:700;">Master</div>
-        <div style="font-size:0.8rem;color:var(--text-muted);margin-top:4px;">Local champion</div>
+
+      <div style="border-radius:12px;overflow:hidden;border:1px solid rgba(0,0,0,0.06);transition:transform 0.2s;" onmouseover="this.style.transform='translateY(-4px)'" onmouseout="this.style.transform='translateY(0)'">
+        <div style="background:#FAEEDA;height:140px;display:flex;align-items:center;justify-content:center;font-size:3rem;position:relative;">🥇
+          <span style="position:absolute;top:8px;right:8px;background:#F39C12;color:white;font-size:0.65rem;padding:2px 7px;border-radius:3px;font-weight:500;">Premium</span>
+        </div>
+        <div style="padding:1rem;">
+          <div style="font-weight:600;font-size:0.9rem;margin-bottom:3px;">Gold Weather Guard</div>
+          <div style="font-size:0.75rem;color:#888;margin-bottom:8px;">Gobis Paints</div>
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <span style="color:#C0392B;font-family:'Playfair Display',serif;font-weight:700;font-size:0.95rem;">Rs. 1,080–16,800</span>
+            <button onclick="showPage('products')" style="background:#C0392B;color:white;border:none;padding:4px 10px;border-radius:4px;font-size:0.75rem;cursor:pointer;">Order</button>
+          </div>
+        </div>
+      </div>
+
+      <div style="border-radius:12px;overflow:hidden;border:1px solid rgba(0,0,0,0.06);transition:transform 0.2s;" onmouseover="this.style.transform='translateY(-4px)'" onmouseout="this.style.transform='translateY(0)'">
+        <div style="background:#F5EEF8;height:140px;display:flex;align-items:center;justify-content:center;font-size:3rem;">💎</div>
+        <div style="padding:1rem;">
+          <div style="font-weight:600;font-size:0.9rem;margin-bottom:3px;">Gloss Finish Enamel</div>
+          <div style="font-size:0.75rem;color:#888;margin-bottom:8px;">Gobis Paints</div>
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <span style="color:#C0392B;font-family:'Playfair Display',serif;font-weight:700;font-size:0.95rem;">Rs. 655–17,400</span>
+            <button onclick="showPage('products')" style="background:#C0392B;color:white;border:none;padding:4px 10px;border-radius:4px;font-size:0.75rem;cursor:pointer;">Order</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div style="text-align:center;">
+      <button onclick="showPage('products')" style="background:#1a1a1a;color:white;border:none;padding:0.85rem 2.5rem;border-radius:6px;font-size:0.95rem;cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:500;letter-spacing:0.5px;">Sare Products Dekhein →</button>
+    </div>
+  </div>
+
+  <!-- WHY US SECTION -->
+  <div style="padding:5rem 4rem;background:var(--gray);">
+    <div style="text-align:center;margin-bottom:3rem;">
+      <p style="font-size:0.75rem;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:var(--primary);margin-bottom:0.8rem;">Why Choose Us</p>
+      <h2 style="font-family:'Playfair Display',serif;font-size:2.2rem;">Hum Kyun Behtar Hain?</h2>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1.5rem;">
+      <div style="background:white;border-radius:12px;padding:2rem 1.5rem;text-align:center;border:1px solid rgba(0,0,0,0.05);">
+        <div style="font-size:2.5rem;margin-bottom:1rem;">🏆</div>
+        <div style="font-weight:600;font-size:0.95rem;margin-bottom:0.5rem;">Original Products</div>
+        <div style="font-size:0.82rem;color:#7a6f65;line-height:1.6;">Sirf asli Gobis products — koi duplicate nahi</div>
+      </div>
+      <div style="background:white;border-radius:12px;padding:2rem 1.5rem;text-align:center;border:1px solid rgba(0,0,0,0.05);">
+        <div style="font-size:2.5rem;margin-bottom:1rem;">🚚</div>
+        <div style="font-weight:600;font-size:0.95rem;margin-bottom:0.5rem;">Home Delivery</div>
+        <div style="font-size:0.82rem;color:#7a6f65;line-height:1.6;">Ghar baithe order karein — delivery hum karein ge</div>
+      </div>
+      <div style="background:white;border-radius:12px;padding:2rem 1.5rem;text-align:center;border:1px solid rgba(0,0,0,0.05);">
+        <div style="font-size:2.5rem;margin-bottom:1rem;">💰</div>
+        <div style="font-weight:600;font-size:0.95rem;margin-bottom:0.5rem;">Best Price</div>
+        <div style="font-size:0.82rem;color:#7a6f65;line-height:1.6;">Market se kam daam — quality mein koi compromise nahi</div>
+      </div>
+      <div style="background:white;border-radius:12px;padding:2rem 1.5rem;text-align:center;border:1px solid rgba(0,0,0,0.05);">
+        <div style="font-size:2.5rem;margin-bottom:1rem;">📞</div>
+        <div style="font-weight:600;font-size:0.95rem;margin-bottom:0.5rem;">Expert Advice</div>
+        <div style="font-size:0.82rem;color:#7a6f65;line-height:1.6;">Kaun sa paint sahi hai? Hum bata dein ge — free mein</div>
+      </div>
+      <div style="background:white;border-radius:12px;padding:2rem 1.5rem;text-align:center;border:1px solid rgba(0,0,0,0.05);">
+        <div style="font-size:2.5rem;margin-bottom:1rem;">⚡</div>
+        <div style="font-weight:600;font-size:0.95rem;margin-bottom:0.5rem;">Fast Service</div>
+        <div style="font-size:0.82rem;color:#7a6f65;line-height:1.6;">Order karo — jald se jald deliver ho</div>
       </div>
     </div>
+  </div>
+
+  <!-- CTA BANNER -->
+  <div style="background:linear-gradient(135deg,#C0392B,#8e1f16);padding:4rem;text-align:center;">
+    <h2 style="font-family:'Playfair Display',serif;font-size:2rem;color:white;margin-bottom:1rem;">Abhi Order Karein!</h2>
+    <p style="color:rgba(255,255,255,0.8);margin-bottom:2rem;font-size:0.95rem;">WhatsApp pe message karein — Muhammad Kashif khud jawab dein ge</p>
+    <a href="https://wa.me/923024746351?text=Assalam o Alaikum! Masha Allah Paint Store se paint lena chahta hun." style="display:inline-block;background:white;color:#C0392B;text-decoration:none;padding:0.9rem 2.5rem;border-radius:6px;font-weight:700;font-size:1rem;letter-spacing:0.5px;">WhatsApp Par Order Karein 📲</a>
   </div>
 
   <footer>
@@ -577,6 +686,47 @@
       </div>
     </div>
     <div class="products-grid" id="productsGrid"></div>
+
+    <!-- PAYMENT METHODS -->
+    <div style="margin-top:3rem;">
+      <h2 style="font-family:'Playfair Display',serif;font-size:1.8rem;margin-bottom:0.5rem;">Payment Methods</h2>
+      <p style="color:#7a6f65;margin-bottom:1.5rem;font-size:0.95rem;">Order karo — in tariqqon se payment karo</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;">
+
+        <!-- JazzCash -->
+        <div style="background:white;border-radius:12px;border:1px solid rgba(0,0,0,0.06);padding:1.5rem;text-align:center;box-shadow:0 2px 12px rgba(0,0,0,0.05);">
+          <div style="font-size:2.5rem;margin-bottom:0.8rem;">🟠</div>
+          <div style="font-weight:700;font-size:1.1rem;color:#E8490F;margin-bottom:0.4rem;">JazzCash</div>
+          <div style="font-size:0.85rem;color:#7a6f65;margin-bottom:0.8rem;">Mobile Account</div>
+          <div style="background:#FFF3ED;border-radius:8px;padding:0.6rem 1rem;font-size:1rem;font-weight:600;color:#E8490F;letter-spacing:1px;">0302-4746351</div>
+          <div style="font-size:0.78rem;color:#7a6f65;margin-top:0.5rem;">Muhammad Kashif</div>
+        </div>
+
+        <!-- Easypaisa -->
+        <div style="background:white;border-radius:12px;border:1px solid rgba(0,0,0,0.06);padding:1.5rem;text-align:center;box-shadow:0 2px 12px rgba(0,0,0,0.05);">
+          <div style="font-size:2.5rem;margin-bottom:0.8rem;">🟢</div>
+          <div style="font-weight:700;font-size:1.1rem;color:#4CAF50;margin-bottom:0.4rem;">Easypaisa</div>
+          <div style="font-size:0.85rem;color:#7a6f65;margin-bottom:0.8rem;">Mobile Account</div>
+          <div style="background:#F0FFF0;border-radius:8px;padding:0.6rem 1rem;font-size:1rem;font-weight:600;color:#2E7D32;letter-spacing:1px;">0302-4746351</div>
+          <div style="font-size:0.78rem;color:#7a6f65;margin-top:0.5rem;">Muhammad Kashif</div>
+        </div>
+
+        <!-- Cash on Delivery -->
+        <div style="background:white;border-radius:12px;border:1px solid rgba(0,0,0,0.06);padding:1.5rem;text-align:center;box-shadow:0 2px 12px rgba(0,0,0,0.05);">
+          <div style="font-size:2.5rem;margin-bottom:0.8rem;">💵</div>
+          <div style="font-weight:700;font-size:1.1rem;color:#C0392B;margin-bottom:0.4rem;">Cash on Delivery</div>
+          <div style="font-size:0.85rem;color:#7a6f65;margin-bottom:0.8rem;">Ghar pe delivery</div>
+          <div style="background:#FFF5F5;border-radius:8px;padding:0.6rem 1rem;font-size:0.9rem;font-weight:500;color:#C0392B;">Order karein — delivery pe cash dein</div>
+          <div style="font-size:0.78rem;color:#7a6f65;margin-top:0.5rem;">Local area mein available</div>
+        </div>
+
+      </div>
+      <!-- Payment note -->
+      <div style="background:#FFF8EC;border:1px solid #F39C12;border-radius:8px;padding:1rem 1.5rem;margin-top:1.2rem;display:flex;align-items:center;gap:10px;">
+        <span style="font-size:1.3rem;">💡</span>
+        <span style="font-size:0.88rem;color:#7a6f65;">Payment karne ke baad WhatsApp pe screenshot zaroor bhejein — <a href="https://wa.me/923024746351" style="color:#C0392B;font-weight:600;">+92 302 4746351</a></span>
+      </div>
+    </div>
   </div>
   <footer>
     &copy; 2025 <span>Masha Allah Paint Store</span> — Bakhri Uch Sharif, Punjab, Pakistan. All rights reserved.
