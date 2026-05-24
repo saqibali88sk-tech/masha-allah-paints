@@ -1,1438 +1,664 @@
 <!DOCTYPE html>
-<html lang="ur" dir="ltr">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Masha Allah Paint Store</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-:root {
-  --bg-primary: #0a0a0a;
-  --bg-secondary: #111111;
-  --bg-card: #161616;
-  --bg-elevated: #1e1e1e;
-  --accent: #d4a017;
-  --accent-light: #f0c040;
-  --accent-dim: #8a6510;
-  --text-primary: #f0f0f0;
-  --text-secondary: #aaaaaa;
-  --text-muted: #666666;
-  --border: #2a2a2a;
-  --border-light: #333333;
-  --green: #22c55e;
-  --red: #ef4444;
-  --jazz: #e85d04;
-  --easy: #00b050;
-  --whatsapp: #25d366;
-}
+*{margin:0;padding:0;box-sizing:border-box;scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:#fff;color:#1a1a2e;overflow-x:hidden}
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
+/* NAV */
+nav{position:fixed;top:0;width:100%;z-index:999;background:rgba(255,255,255,0.95);backdrop-filter:blur(12px);border-bottom:1px solid #f0f0f0;padding:0 4rem;display:flex;align-items:center;justify-content:space-between;height:70px}
+.nav-logo{display:flex;align-items:center;gap:10px;cursor:pointer}
+.nav-logo-icon{width:38px;height:38px;background:linear-gradient(135deg,#4F6AF5,#7C3AED);border-radius:10px;display:flex;align-items:center;justify-content:center;color:white;font-weight:800;font-size:14px}
+.nav-logo-text{font-weight:700;font-size:1rem;color:#1a1a2e;line-height:1.2}
+.nav-logo-sub{font-size:0.72rem;color:#888;font-weight:400}
+.nav-links{display:flex;gap:2.5rem;list-style:none}
+.nav-links a{color:#555;text-decoration:none;font-size:0.9rem;font-weight:500;transition:color 0.2s}
+.nav-links a:hover{color:#4F6AF5}
+.nav-cta{background:#4F6AF5;color:white;border:none;padding:0.6rem 1.5rem;border-radius:8px;font-size:0.88rem;font-family:'Inter',sans-serif;cursor:pointer;font-weight:600;transition:all 0.2s}
+.nav-cta:hover{background:#3d58e0;transform:translateY(-1px)}
 
-body {
-  font-family: 'Outfit', sans-serif;
-  background: var(--bg-primary);
-  color: var(--text-primary);
-  min-height: 100vh;
-}
+/* PAGES */
+.page{display:none}.page.active{display:block}
 
-/* ===== NAVBAR ===== */
-nav {
-  position: fixed; top: 0; width: 100%; z-index: 1000;
-  background: rgba(10,10,10,0.95);
-  backdrop-filter: blur(20px);
-  border-bottom: 1px solid var(--border);
-  padding: 0 24px;
-  height: 64px;
-  display: flex; align-items: center; justify-content: space-between;
-}
-.nav-logo {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.4rem; font-weight: 900;
-  color: var(--accent);
-  text-decoration: none;
-  letter-spacing: 1px;
-}
-.nav-links { display: flex; gap: 32px; list-style: none; }
-.nav-links a {
-  color: var(--text-secondary);
-  text-decoration: none;
-  font-size: 0.9rem; font-weight: 500;
-  transition: color 0.2s;
-  letter-spacing: 0.5px;
-}
-.nav-links a:hover { color: var(--accent); }
-.nav-right { display: flex; align-items: center; gap: 12px; }
-.btn-login {
-  background: transparent; border: 1px solid var(--border-light);
-  color: var(--text-secondary); padding: 8px 16px; border-radius: 6px;
-  font-size: 0.85rem; cursor: pointer; transition: all 0.2s;
-  font-family: 'Outfit', sans-serif;
-}
-.btn-login:hover { border-color: var(--accent); color: var(--accent); }
-.cart-btn {
-  background: var(--accent); color: #000;
-  border: none; padding: 8px 16px; border-radius: 6px;
-  font-size: 0.85rem; font-weight: 600; cursor: pointer;
-  transition: all 0.2s; font-family: 'Outfit', sans-serif;
-}
-.cart-btn:hover { background: var(--accent-light); }
-#cart-count {
-  background: var(--red); color: #fff;
-  border-radius: 50%; width: 18px; height: 18px;
-  font-size: 0.7rem; font-weight: 700;
-  display: inline-flex; align-items: center; justify-content: center;
-  margin-left: 4px;
-}
+/* HERO */
+#hero-page{padding-top:70px}
+.hero{min-height:92vh;position:relative;display:flex;align-items:center;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:linear-gradient(to right,rgba(255,255,255,0.97) 45%,rgba(255,255,255,0.3) 100%);z-index:1}
+.hero-img{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1562259929-b4e1fd3aef09?w=1400&q=80') center/cover no-repeat;z-index:0}
+.hero-content{position:relative;z-index:2;padding:4rem 4rem;max-width:620px}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;background:#EEF2FF;color:#4F6AF5;font-size:0.78rem;font-weight:600;padding:0.4rem 1rem;border-radius:999px;margin-bottom:1.5rem;border:1px solid #C7D2FE}
+.hero-title{font-size:clamp(2.8rem,5vw,4.2rem);font-weight:900;line-height:1.1;color:#1a1a2e;margin-bottom:1.2rem}
+.hero-title .blue{color:#4F6AF5}.hero-title .purple{color:#7C3AED}
+.hero-desc{font-size:1rem;color:#555;line-height:1.8;margin-bottom:2.5rem;max-width:480px}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap}
+.btn-blue{background:#4F6AF5;color:white;border:none;padding:0.85rem 2rem;border-radius:10px;font-size:0.95rem;font-family:'Inter',sans-serif;cursor:pointer;font-weight:600;transition:all 0.2s}
+.btn-blue:hover{background:#3d58e0;transform:translateY(-2px)}
+.btn-ghost{background:transparent;color:#1a1a2e;border:1.5px solid #ddd;padding:0.85rem 2rem;border-radius:10px;font-size:0.95rem;font-family:'Inter',sans-serif;cursor:pointer;font-weight:500;transition:all 0.2s}
+.btn-ghost:hover{border-color:#4F6AF5;color:#4F6AF5}
+.hero-stats{display:flex;gap:2.5rem;margin-top:3rem;padding-top:2rem;border-top:1px solid #f0f0f0}
+.stat-num{font-size:1.8rem;font-weight:800;color:#4F6AF5}.stat-label{font-size:0.78rem;color:#888;margin-top:2px}
 
-/* ===== PAGES ===== */
-.page { display: none; padding-top: 64px; }
-.page.active { display: block; }
+/* BRANDS STRIP */
+.brands-strip{padding:3rem 4rem;border-top:1px solid #f0f0f0;border-bottom:1px solid #f0f0f0;background:#fafafa}
+.brands-label{text-align:center;font-size:0.72rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#999;margin-bottom:2rem}
+.brands-row{display:flex;align-items:center;justify-content:center;gap:4rem;flex-wrap:wrap}
+.brand-logo{display:flex;align-items:center;gap:10px;opacity:0.75;transition:opacity 0.2s;cursor:pointer}
+.brand-logo:hover{opacity:1}
+.gobis-icon{width:44px;height:44px;background:#1E90FF;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.gobis-icon svg{width:24px;height:24px;fill:white}
+.brand-name-gobis{font-size:1.4rem;font-weight:800;letter-spacing:1px;color:#1E90FF}
+.brand-name-gobis span{color:#666;font-weight:400;font-size:1rem;margin-left:2px}
+.diamond-icon{width:44px;height:44px;display:flex;align-items:center;justify-content:center}
+.diamond-shape{width:32px;height:32px;background:#FF6B8A;transform:rotate(45deg);border-radius:4px;display:flex;align-items:center;justify-content:center}
+.diamond-inner{width:16px;height:16px;background:white;border-radius:50%}
+.brand-name-diamond{font-size:1.3rem;font-weight:800;letter-spacing:1px;color:#1a1a2e}
+.brand-name-diamond span{color:#888;font-weight:400;font-size:1rem;margin-left:2px}
+.brand-divider{width:1px;height:50px;background:#ddd}
 
-/* ===== HERO ===== */
-.hero {
-  min-height: 100vh;
-  background: 
-    radial-gradient(ellipse at 20% 50%, rgba(212,160,23,0.08) 0%, transparent 60%),
-    radial-gradient(ellipse at 80% 20%, rgba(212,160,23,0.05) 0%, transparent 50%),
-    var(--bg-primary);
-  display: flex; align-items: center; justify-content: center;
-  text-align: center; padding: 80px 24px 40px;
-  position: relative; overflow: hidden;
-}
-.hero::before {
-  content: '';
-  position: absolute; inset: 0;
-  background: repeating-linear-gradient(
-    0deg, transparent, transparent 80px,
-    rgba(212,160,23,0.02) 80px, rgba(212,160,23,0.02) 81px
-  );
-}
-.hero-content { position: relative; z-index: 1; max-width: 800px; }
-.hero-badge {
-  display: inline-block;
-  background: rgba(212,160,23,0.1);
-  border: 1px solid rgba(212,160,23,0.3);
-  color: var(--accent);
-  padding: 6px 16px; border-radius: 20px;
-  font-size: 0.8rem; font-weight: 600;
-  letter-spacing: 2px; text-transform: uppercase;
-  margin-bottom: 24px;
-}
-.hero h1 {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(2.5rem, 7vw, 5rem);
-  font-weight: 900; line-height: 1.1;
-  margin-bottom: 20px;
-}
-.hero h1 span { color: var(--accent); }
-.hero p {
-  font-size: 1.1rem; color: var(--text-secondary);
-  line-height: 1.7; margin-bottom: 40px;
-}
-.hero-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
-.btn-primary {
-  background: var(--accent); color: #000;
-  border: none; padding: 14px 32px; border-radius: 8px;
-  font-size: 1rem; font-weight: 700; cursor: pointer;
-  transition: all 0.2s; font-family: 'Outfit', sans-serif;
-  text-decoration: none; display: inline-block;
-}
-.btn-primary:hover { background: var(--accent-light); transform: translateY(-1px); }
-.btn-outline {
-  background: transparent; color: var(--text-primary);
-  border: 1px solid var(--border-light); padding: 14px 32px; border-radius: 8px;
-  font-size: 1rem; font-weight: 500; cursor: pointer;
-  transition: all 0.2s; font-family: 'Outfit', sans-serif;
-  text-decoration: none; display: inline-block;
-}
-.btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+/* SECTIONS */
+.section{padding:6rem 4rem}
+.sec-label{font-size:0.72rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#4F6AF5;margin-bottom:0.8rem}
+.sec-title{font-size:2.2rem;font-weight:800;color:#1a1a2e;margin-bottom:1rem;line-height:1.2}
+.sec-sub{color:#777;font-size:0.95rem;line-height:1.7;max-width:560px}
 
-.hero-stats {
-  display: flex; gap: 48px; justify-content: center;
-  margin-top: 64px; flex-wrap: wrap;
-}
-.stat { text-align: center; }
-.stat-num {
-  font-family: 'Playfair Display', serif;
-  font-size: 2.5rem; font-weight: 900;
-  color: var(--accent);
-}
-.stat-label { font-size: 0.85rem; color: var(--text-muted); margin-top: 4px; }
+/* CATEGORIES */
+.cats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3rem}
+.cat-card{border-radius:16px;overflow:hidden;position:relative;cursor:pointer;transition:transform 0.2s}
+.cat-card:hover{transform:translateY(-4px)}
+.cat-img{width:100%;height:280px;object-fit:cover;display:block}
+.cat-overlay{position:absolute;bottom:0;left:0;right:0;padding:1.5rem;background:linear-gradient(to top,rgba(0,0,0,0.75) 0%,transparent 100%)}
+.cat-icon-wrap{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:0.7rem}
+.cat-name{font-size:1.1rem;font-weight:700;color:white;margin-bottom:0.3rem}
+.cat-desc{font-size:0.82rem;color:rgba(255,255,255,0.8);line-height:1.5}
 
-.hero-features {
-  display: flex; gap: 24px; justify-content: center;
-  margin-top: 48px; flex-wrap: wrap;
-}
-.feat-pill {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  padding: 10px 20px; border-radius: 30px;
-  font-size: 0.85rem; color: var(--text-secondary);
-  display: flex; align-items: center; gap: 8px;
-}
+/* EXPERTISE */
+.expertise{background:#f0f4ff;padding:6rem 4rem}
+.exp-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;margin-top:0}
+.exp-img-wrap{position:relative}
+.exp-img{width:100%;height:420px;object-fit:cover;border-radius:20px}
+.exp-badge-float{position:absolute;bottom:24px;right:-20px;background:white;border-radius:12px;padding:1.2rem 1.5rem;box-shadow:0 8px 32px rgba(0,0,0,0.12)}
+.exp-badge-num{font-size:2rem;font-weight:800;color:#4F6AF5}
+.exp-badge-text{font-size:0.8rem;color:#888;margin-top:2px;max-width:120px;line-height:1.4}
+.exp-list{display:flex;flex-direction:column;gap:1.5rem;margin-top:2rem}
+.exp-item{display:flex;gap:1rem;align-items:flex-start}
+.exp-check{width:28px;height:28px;border-radius:50%;background:#EEF2FF;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.exp-check svg{width:14px;height:14px;stroke:#4F6AF5;fill:none;stroke-width:2.5}
+.exp-item-title{font-weight:600;font-size:0.95rem;margin-bottom:4px}
+.exp-item-sub{font-size:0.85rem;color:#777;line-height:1.6}
 
-/* ===== SECTIONS ===== */
-section { padding: 80px 24px; }
-.section-title {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(1.8rem, 4vw, 2.8rem);
-  font-weight: 900; margin-bottom: 8px;
-}
-.section-sub { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 48px; }
-.section-header { text-align: center; margin-bottom: 48px; }
+/* GALLERY */
+.gallery-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:2.5rem}
+.gal-card{border-radius:16px;overflow:hidden;position:relative;cursor:pointer}
+.gal-img{width:100%;height:320px;object-fit:cover;display:block;transition:transform 0.3s}
+.gal-card:hover .gal-img{transform:scale(1.03)}
+.gal-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.6) 0%,transparent 60%);padding:1.5rem;display:flex;flex-direction:column;justify-content:flex-end}
+.gal-tag{font-size:0.75rem;font-weight:600;color:#7C3AED;margin-bottom:0.3rem}
+.gal-title{font-size:1.2rem;font-weight:700;color:white}
 
-/* ===== PRODUCT FILTERS ===== */
-.filter-bar {
-  display: flex; gap: 10px; flex-wrap: wrap;
-  justify-content: center; margin-bottom: 40px;
-}
-.filter-btn {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  color: var(--text-secondary);
-  padding: 8px 20px; border-radius: 20px;
-  font-size: 0.85rem; cursor: pointer;
-  transition: all 0.2s; font-family: 'Outfit', sans-serif;
-}
-.filter-btn.active, .filter-btn:hover {
-  background: var(--accent); color: #000;
-  border-color: var(--accent); font-weight: 600;
-}
+/* REVIEWS */
+.reviews{background:#fafafa;padding:6rem 4rem}
+.reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3rem}
+.rev-card{background:white;border-radius:16px;padding:2rem;border:1px solid #f0f0f0;transition:box-shadow 0.2s}
+.rev-card:hover{box-shadow:0 8px 32px rgba(0,0,0,0.08)}
+.rev-quote{font-size:2.5rem;color:#C7D2FE;font-weight:800;line-height:1;margin-bottom:1rem}
+.rev-text{font-size:0.88rem;color:#555;line-height:1.7;margin-bottom:1.5rem;font-style:italic}
+.rev-author{display:flex;align-items:center;gap:10px}
+.rev-avatar{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1rem;color:white;flex-shrink:0}
+.rev-name{font-weight:600;font-size:0.9rem}
+.rev-role{font-size:0.78rem;color:#888}
+.rev-stars{color:#F59E0B;font-size:0.8rem;margin-bottom:4px}
 
-/* ===== PRODUCT GRID ===== */
-.products-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 24px; max-width: 1200px; margin: 0 auto;
-}
-.product-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 12px; overflow: hidden;
-  transition: all 0.3s;
-  position: relative;
-}
-.product-card:hover {
-  border-color: var(--accent-dim);
-  transform: translateY(-4px);
-  box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-}
-.product-badge {
-  position: absolute; top: 12px; left: 12px; z-index: 2;
-  background: var(--accent); color: #000;
-  padding: 4px 10px; border-radius: 4px;
-  font-size: 0.75rem; font-weight: 700;
-}
-.product-img {
-  width: 100%; height: 200px;
-  object-fit: cover; object-position: center;
-  background: var(--bg-elevated);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 4rem; position: relative;
-  overflow: hidden;
-}
-.product-img img {
-  width: 100%; height: 100%;
-  object-fit: cover;
-}
-.product-img-placeholder {
-  width: 100%; height: 200px;
-  background: linear-gradient(135deg, var(--bg-elevated) 0%, var(--bg-secondary) 100%);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 3rem;
-}
-.product-info { padding: 16px; }
-.product-brand { font-size: 0.75rem; color: var(--accent); font-weight: 600; letter-spacing: 1px; text-transform: uppercase; }
-.product-name { font-size: 1rem; font-weight: 600; margin: 4px 0 8px; }
-.product-desc { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 12px; line-height: 1.5; }
-.product-price { font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 12px; }
-.product-price span { color: var(--accent); font-weight: 700; font-size: 1.1rem; }
-.add-to-cart {
-  width: 100%; background: var(--accent); color: #000;
-  border: none; padding: 10px; border-radius: 6px;
-  font-size: 0.9rem; font-weight: 700; cursor: pointer;
-  transition: all 0.2s; font-family: 'Outfit', sans-serif;
-}
-.add-to-cart:hover { background: var(--accent-light); }
+/* CONTACT DARK */
+.contact-dark{background:#0f172a;padding:6rem 4rem}
+.contact-dark h2{font-size:2.2rem;font-weight:800;color:white;text-align:center;margin-bottom:0.8rem}
+.contact-dark .sub{color:#94a3b8;text-align:center;font-size:0.95rem;margin-bottom:3rem}
+.contact-cards{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;max-width:800px;margin:0 auto 2.5rem}
+.cc{background:#1e293b;border-radius:16px;padding:2rem;border:1px solid #334155}
+.cc-icon{width:52px;height:52px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin-bottom:1.2rem}
+.cc h3{color:white;font-size:1.1rem;font-weight:700;margin-bottom:0.8rem}
+.cc p{color:#94a3b8;font-size:0.88rem;line-height:1.7;margin-bottom:1.2rem}
+.cc-btn{width:100%;padding:0.75rem;border-radius:8px;font-size:0.9rem;font-family:'Inter',sans-serif;font-weight:600;cursor:pointer;transition:all 0.2s;border:1.5px solid #334155;background:transparent;color:#94a3b8}
+.cc-btn:hover{border-color:#4F6AF5;color:#4F6AF5}
+.cc-btn-green{background:#25D366;color:white;border:none}
+.cc-btn-green:hover{background:#1da851}
 
-/* ===== PAYMENT SECTION ===== */
-.payment-grid {
-  display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 20px; max-width: 900px; margin: 0 auto;
-}
-.payment-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 12px; padding: 24px;
-  text-align: center; transition: all 0.3s;
-}
-.payment-card:hover { border-color: var(--accent-dim); transform: translateY(-2px); }
-.payment-logo {
-  width: 80px; height: 80px; border-radius: 16px;
-  margin: 0 auto 16px; display: flex;
-  align-items: center; justify-content: center;
-  font-size: 2.5rem; font-weight: 900;
-  color: #fff;
-}
-.jazzcash-logo { background: linear-gradient(135deg, #e85d04, #ff7c20); }
-.easypaisa-logo { background: linear-gradient(135deg, #00843d, #00b050); }
-.whatsapp-logo { background: linear-gradient(135deg, #128c7e, #25d366); }
-.cod-logo { background: linear-gradient(135deg, #374151, #4b5563); }
-.payment-name { font-size: 1.1rem; font-weight: 700; margin-bottom: 4px; }
-.payment-number { color: var(--accent); font-weight: 700; font-size: 1rem; margin: 8px 0 4px; }
-.payment-holder { color: var(--text-muted); font-size: 0.85rem; }
+/* PAYMENT SECTION IN CONTACT */
+.payment-section{max-width:800px;margin:2.5rem auto 0}
+.pay-title{color:#94a3b8;font-size:0.72rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;text-align:center;margin-bottom:1.5rem}
+.pay-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.pay-card{background:#1e293b;border-radius:12px;padding:1.5rem;text-align:center;border:1px solid #334155}
+.pay-logo{font-size:2rem;margin-bottom:0.8rem}
+.pay-name{font-weight:700;font-size:0.95rem;margin-bottom:0.4rem}
+.pay-num{font-size:0.85rem;padding:0.4rem 0.8rem;border-radius:6px;font-weight:600;letter-spacing:1px;margin-bottom:0.3rem;display:inline-block}
+.pay-owner{font-size:0.75rem;color:#64748b}
 
-/* ===== ABOUT SECTION ===== */
-.about-grid {
-  display: grid; grid-template-columns: 1fr 1fr;
-  gap: 60px; max-width: 1000px; margin: 0 auto;
-  align-items: center;
-}
-@media(max-width:768px) { .about-grid { grid-template-columns: 1fr; gap: 40px; } }
-.about-text p { color: var(--text-secondary); line-height: 1.8; margin-bottom: 16px; }
-.gobis-badge {
-  background: var(--bg-elevated);
-  border: 1px solid var(--border-light);
-  border-radius: 12px; padding: 24px;
-  text-align: center; margin-top: 24px;
-}
-.gobis-badge .brand { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 900; color: var(--accent); }
-.gobis-badge p { color: var(--text-muted); font-size: 0.85rem; margin-top: 4px; }
-.why-list { list-style: none; display: flex; flex-direction: column; gap: 16px; }
-.why-item {
-  display: flex; gap: 16px; align-items: flex-start;
-  background: var(--bg-card); border: 1px solid var(--border);
-  padding: 16px; border-radius: 10px;
-}
-.why-icon { font-size: 1.5rem; flex-shrink: 0; }
-.why-title { font-weight: 600; margin-bottom: 2px; }
-.why-desc { font-size: 0.85rem; color: var(--text-muted); }
+/* PRODUCTS PAGE */
+#products-page{padding-top:70px;min-height:100vh;background:#fafafa}
+.prod-hero{background:#0f172a;padding:4rem;text-align:center}
+.prod-hero h1{font-family:'Inter',sans-serif;color:white;font-size:2.2rem;font-weight:800;margin-bottom:0.5rem}
+.prod-hero p{color:#94a3b8;font-size:0.95rem}
+.prod-section{padding:3rem 4rem}
+.filter-bar{display:flex;gap:0.8rem;flex-wrap:wrap;margin-bottom:2rem}
+.filter-btn{padding:0.5rem 1.2rem;border-radius:999px;border:1.5px solid #ddd;background:transparent;color:#555;font-size:0.85rem;cursor:pointer;font-family:'Inter',sans-serif;font-weight:500;transition:all 0.2s}
+.filter-btn.active,.filter-btn:hover{background:#4F6AF5;color:white;border-color:#4F6AF5}
+.cart-bar{display:none;background:#0f172a;color:white;padding:0.9rem 1.5rem;border-radius:12px;margin-bottom:1.5rem;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.cart-bar.show{display:flex}
+.products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1.5rem}
+.product-card{background:white;border-radius:14px;overflow:hidden;border:1px solid #f0f0f0;transition:transform 0.2s,box-shadow 0.2s;cursor:pointer}
+.product-card:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(0,0,0,0.1)}
+.product-img{height:180px;display:flex;align-items:center;justify-content:center;font-size:3rem;position:relative;overflow:hidden}
+.product-badge{position:absolute;top:10px;right:10px;background:#4F6AF5;color:white;font-size:0.68rem;font-weight:600;padding:0.2rem 0.6rem;border-radius:4px}
+.product-info{padding:1.2rem}
+.product-name{font-weight:600;font-size:0.92rem;margin-bottom:0.2rem;color:#1a1a2e}
+.product-brand{font-size:0.78rem;color:#888;margin-bottom:6px}
+.product-desc{font-size:0.78rem;color:#aaa;margin-bottom:0.8rem}
+.product-footer{display:flex;align-items:center;justify-content:space-between}
+.product-price{font-size:1rem;color:#4F6AF5;font-weight:700}
+.add-btn{background:#4F6AF5;color:white;border:none;padding:0.4rem 0.9rem;border-radius:6px;font-size:0.8rem;cursor:pointer;font-family:'Inter',sans-serif;font-weight:500;transition:background 0.2s}
+.add-btn:hover{background:#3d58e0}
 
-/* ===== CONTACT SECTION ===== */
-.contact-grid {
-  display: grid; grid-template-columns: 1fr 1fr;
-  gap: 40px; max-width: 900px; margin: 0 auto;
-}
-@media(max-width:768px) { .contact-grid { grid-template-columns: 1fr; } }
-.contact-info { display: flex; flex-direction: column; gap: 20px; }
-.info-card {
-  background: var(--bg-card); border: 1px solid var(--border);
-  border-radius: 10px; padding: 16px;
-  display: flex; gap: 16px; align-items: flex-start;
-}
-.info-icon { font-size: 1.4rem; flex-shrink: 0; }
-.info-label { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
-.info-value { font-weight: 500; margin-top: 2px; }
-.info-value a { color: var(--accent); text-decoration: none; }
+/* CART MODAL */
+.cart-modal{display:none;background:white;border-radius:14px;border:1px solid #f0f0f0;padding:1.5rem;margin-bottom:1.5rem}
 
-.contact-form { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 28px; }
-.form-group { margin-bottom: 16px; }
-.form-group label { display: block; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 6px; }
-.form-group input, .form-group select, .form-group textarea {
-  width: 100%; background: var(--bg-elevated);
-  border: 1px solid var(--border);
-  color: var(--text-primary); padding: 10px 14px;
-  border-radius: 6px; font-family: 'Outfit', sans-serif;
-  font-size: 0.9rem; transition: border-color 0.2s;
-}
-.form-group input:focus, .form-group select:focus, .form-group textarea:focus {
-  outline: none; border-color: var(--accent);
-}
-.form-group textarea { resize: vertical; min-height: 100px; }
-.form-group select option { background: var(--bg-elevated); }
+/* LOGIN PAGE */
+#login-page{padding-top:70px;min-height:100vh;background:#f8faff;display:flex;align-items:center;justify-content:center}
+.login-wrap{display:grid;grid-template-columns:1fr 1fr;max-width:860px;width:90%;border-radius:20px;overflow:hidden;box-shadow:0 24px 64px rgba(79,106,245,0.15)}
+.login-left{background:linear-gradient(135deg,#4F6AF5,#7C3AED);padding:3rem;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
+.login-left h2{color:white;font-size:1.8rem;font-weight:800;margin-bottom:1rem}
+.login-left p{color:rgba(255,255,255,0.8);font-size:0.9rem;line-height:1.7;margin-bottom:2rem}
+.login-logo{font-size:3rem;font-weight:900;color:white;margin-bottom:1rem}
+.login-right{background:white;padding:3rem;display:flex;flex-direction:column;justify-content:center}
+.login-right h3{font-size:1.5rem;font-weight:800;margin-bottom:0.4rem}
+.login-right .sub{color:#888;font-size:0.88rem;margin-bottom:2rem}
+.tabs{display:flex;border:1.5px solid #eee;border-radius:8px;overflow:hidden;margin-bottom:2rem}
+.tab-btn{flex:1;padding:0.65rem;background:transparent;border:none;font-family:'Inter',sans-serif;font-size:0.88rem;cursor:pointer;transition:all 0.2s;color:#888}
+.tab-btn.active{background:#4F6AF5;color:white;font-weight:600}
+.form-group{margin-bottom:1rem}
+.form-group label{display:block;font-size:0.82rem;font-weight:500;margin-bottom:0.4rem;color:#444}
+.form-group input{width:100%;padding:0.75rem 1rem;border:1.5px solid #eee;border-radius:8px;font-family:'Inter',sans-serif;font-size:0.9rem;outline:none;transition:border-color 0.2s;background:#fafafa}
+.form-group input:focus{border-color:#4F6AF5;background:white}
+.login-btn{width:100%;background:#4F6AF5;color:white;border:none;padding:0.85rem;border-radius:8px;font-size:0.95rem;font-family:'Inter',sans-serif;font-weight:600;cursor:pointer;transition:all 0.2s}
+.login-btn:hover{background:#3d58e0}
 
-/* ===== CART SIDEBAR ===== */
-.cart-overlay {
-  position: fixed; inset: 0; background: rgba(0,0,0,0.7);
-  z-index: 2000; display: none; align-items: stretch; justify-content: flex-end;
-}
-.cart-overlay.open { display: flex; }
-.cart-panel {
-  width: 380px; max-width: 100vw;
-  background: var(--bg-secondary);
-  border-left: 1px solid var(--border);
-  display: flex; flex-direction: column;
-  overflow-y: auto;
-}
-.cart-header {
-  padding: 20px 24px;
-  border-bottom: 1px solid var(--border);
-  display: flex; align-items: center; justify-content: space-between;
-}
-.cart-header h3 { font-size: 1.1rem; font-weight: 700; }
-.close-cart {
-  background: var(--bg-elevated); border: none; color: var(--text-secondary);
-  width: 32px; height: 32px; border-radius: 6px;
-  cursor: pointer; font-size: 1rem; display: flex;
-  align-items: center; justify-content: center;
-}
-.cart-items { flex: 1; padding: 16px 24px; overflow-y: auto; }
-.cart-empty { text-align: center; color: var(--text-muted); padding: 40px 0; font-size: 0.9rem; }
-.cart-item {
-  display: flex; gap: 12px; align-items: flex-start;
-  padding: 12px 0; border-bottom: 1px solid var(--border);
-}
-.cart-item-img {
-  width: 60px; height: 60px; border-radius: 8px;
-  background: var(--bg-elevated); flex-shrink: 0;
-  overflow: hidden; display: flex; align-items: center; justify-content: center;
-  font-size: 1.5rem;
-}
-.cart-item-img img { width: 100%; height: 100%; object-fit: cover; }
-.cart-item-info { flex: 1; }
-.cart-item-name { font-size: 0.9rem; font-weight: 600; }
-.cart-item-price { color: var(--accent); font-size: 0.85rem; margin-top: 2px; }
-.qty-controls { display: flex; gap: 8px; align-items: center; margin-top: 8px; }
-.qty-btn {
-  background: var(--bg-elevated); border: 1px solid var(--border);
-  color: var(--text-primary); width: 26px; height: 26px;
-  border-radius: 4px; cursor: pointer; font-size: 1rem;
-  display: flex; align-items: center; justify-content: center;
-}
-.qty-btn:hover { border-color: var(--accent); }
-.qty-num { font-size: 0.9rem; font-weight: 600; min-width: 20px; text-align: center; }
-.remove-btn {
-  background: none; border: none; color: var(--red);
-  cursor: pointer; font-size: 0.8rem; padding: 4px;
-}
-.cart-footer {
-  padding: 20px 24px;
-  border-top: 1px solid var(--border);
-}
-.cart-total {
-  display: flex; justify-content: space-between;
-  font-size: 1rem; font-weight: 700; margin-bottom: 16px;
-}
-.cart-total span:last-child { color: var(--accent); }
-.whatsapp-order {
-  width: 100%;
-  background: var(--whatsapp); color: #fff;
-  border: none; padding: 12px; border-radius: 8px;
-  font-size: 0.95rem; font-weight: 700; cursor: pointer;
-  font-family: 'Outfit', sans-serif; transition: all 0.2s;
-}
-.whatsapp-order:hover { filter: brightness(1.1); }
+/* FOOTER */
+footer{background:#0f172a;color:#64748b;padding:2rem 4rem;text-align:center;font-size:0.85rem;border-top:1px solid #1e293b}
+footer span{color:#4F6AF5}
 
-/* ===== ADMIN PANEL ===== */
-.admin-overlay {
-  position: fixed; inset: 0;
-  background: rgba(0,0,0,0.9);
-  z-index: 3000; display: none;
-  align-items: center; justify-content: center;
-  padding: 16px;
-}
-.admin-overlay.open { display: flex; }
-.admin-panel {
-  background: var(--bg-secondary);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  width: 100%; max-width: 900px;
-  max-height: 90vh; overflow-y: auto;
-}
-.admin-header {
-  padding: 20px 24px;
-  border-bottom: 1px solid var(--border);
-  display: flex; align-items: center; justify-content: space-between;
-  position: sticky; top: 0;
-  background: var(--bg-secondary); z-index: 1;
-}
-.admin-header h2 { font-size: 1.2rem; font-weight: 700; }
-.close-admin {
-  background: var(--bg-elevated); border: 1px solid var(--border);
-  color: var(--text-secondary); padding: 6px 14px;
-  border-radius: 6px; cursor: pointer; font-family: 'Outfit', sans-serif;
-}
-.admin-tabs {
-  display: flex; gap: 4px; padding: 16px 24px;
-  border-bottom: 1px solid var(--border);
-  overflow-x: auto;
-}
-.admin-tab {
-  background: transparent; border: 1px solid var(--border);
-  color: var(--text-muted); padding: 8px 18px; border-radius: 6px;
-  font-family: 'Outfit', sans-serif; font-size: 0.85rem;
-  cursor: pointer; white-space: nowrap; transition: all 0.2s;
-}
-.admin-tab.active {
-  background: var(--accent); color: #000;
-  border-color: var(--accent); font-weight: 700;
-}
-.admin-content { padding: 24px; }
-.admin-tab-pane { display: none; }
-.admin-tab-pane.active { display: block; }
+/* WHATSAPP FLOAT */
+.wa-float{position:fixed;bottom:2rem;right:2rem;z-index:9999;display:flex;align-items:center;gap:10px;background:#25D366;color:white;padding:0.75rem 1.2rem;border-radius:999px;box-shadow:0 8px 24px rgba(37,211,102,0.4);cursor:pointer;text-decoration:none;font-weight:600;font-size:0.88rem;font-family:'Inter',sans-serif;transition:all 0.2s}
+.wa-float:hover{background:#1da851;transform:translateY(-2px);box-shadow:0 12px 32px rgba(37,211,102,0.5)}
+.wa-icon{width:26px;height:26px;flex-shrink:0}
 
-/* Add Product Form */
-.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-@media(max-width:600px) { .form-grid { grid-template-columns: 1fr; } }
-.admin-form-group { margin-bottom: 0; }
-.admin-form-group label { display: block; font-size: 0.82rem; color: var(--text-muted); margin-bottom: 6px; }
-.admin-form-group input, .admin-form-group select, .admin-form-group textarea {
-  width: 100%; background: var(--bg-elevated);
-  border: 1px solid var(--border);
-  color: var(--text-primary); padding: 10px 14px;
-  border-radius: 6px; font-family: 'Outfit', sans-serif;
-  font-size: 0.9rem; transition: border-color 0.2s;
-}
-.admin-form-group input:focus, .admin-form-group select:focus, .admin-form-group textarea:focus {
-  outline: none; border-color: var(--accent);
-}
-.admin-form-group select option { background: var(--bg-elevated); }
-.admin-form-group textarea { resize: vertical; min-height: 80px; }
-.full-width { grid-column: 1 / -1; }
-.form-divider { grid-column: 1 / -1; border: none; border-top: 1px solid var(--border); margin: 8px 0; }
-
-/* Product list in admin */
-.admin-product-list { display: flex; flex-direction: column; gap: 12px; }
-.admin-product-item {
-  background: var(--bg-card);
-  border: 1px solid var(--border); border-radius: 10px;
-  padding: 14px; display: flex; gap: 14px; align-items: flex-start;
-}
-.admin-product-thumb {
-  width: 60px; height: 60px; border-radius: 8px;
-  background: var(--bg-elevated); flex-shrink: 0;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 1.8rem; overflow: hidden;
-}
-.admin-product-thumb img { width: 100%; height: 100%; object-fit: cover; }
-.admin-product-meta { flex: 1; min-width: 0; }
-.admin-product-name { font-weight: 600; font-size: 0.95rem; margin-bottom: 2px; }
-.admin-product-cat { font-size: 0.75rem; color: var(--accent); font-weight: 600; text-transform: uppercase; }
-.admin-product-price { font-size: 0.85rem; color: var(--text-muted); margin-top: 4px; }
-.admin-product-actions { display: flex; gap: 8px; flex-shrink: 0; align-items: flex-start; }
-.btn-edit {
-  background: transparent; border: 1px solid var(--border-light);
-  color: var(--text-secondary); padding: 5px 12px; border-radius: 5px;
-  font-size: 0.8rem; cursor: pointer; font-family: 'Outfit', sans-serif;
-  transition: all 0.2s;
-}
-.btn-edit:hover { border-color: var(--accent); color: var(--accent); }
-.btn-delete {
-  background: transparent; border: 1px solid rgba(239,68,68,0.3);
-  color: var(--red); padding: 5px 12px; border-radius: 5px;
-  font-size: 0.8rem; cursor: pointer; font-family: 'Outfit', sans-serif;
-  transition: all 0.2s;
-}
-.btn-delete:hover { background: rgba(239,68,68,0.1); }
-
-/* Image upload */
-.img-upload-area {
-  border: 2px dashed var(--border);
-  border-radius: 10px; padding: 24px;
-  text-align: center; cursor: pointer;
-  transition: border-color 0.2s; position: relative;
-}
-.img-upload-area:hover { border-color: var(--accent); }
-.img-upload-area input[type=file] {
-  position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%;
-}
-.img-preview {
-  width: 100%; max-height: 120px; object-fit: contain;
-  border-radius: 8px; margin-top: 10px; display: none;
-}
-
-/* Login modal */
-.login-overlay {
-  position: fixed; inset: 0; background: rgba(0,0,0,0.85);
-  z-index: 4000; display: none; align-items: center; justify-content: center; padding: 16px;
-}
-.login-overlay.open { display: flex; }
-.login-panel {
-  background: var(--bg-secondary); border: 1px solid var(--border);
-  border-radius: 16px; padding: 36px; width: 100%; max-width: 400px;
-}
-.login-panel h2 {
-  font-family: 'Playfair Display', serif; font-size: 1.6rem;
-  margin-bottom: 6px;
-}
-.login-panel p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 24px; }
-.login-panel .form-group { margin-bottom: 14px; }
-.login-panel .form-group input {
-  background: var(--bg-elevated); border: 1px solid var(--border);
-  color: var(--text-primary); padding: 11px 14px;
-  width: 100%; border-radius: 7px; font-family: 'Outfit', sans-serif;
-  font-size: 0.9rem;
-}
-.login-panel .form-group input:focus { outline: none; border-color: var(--accent); }
-.login-note { font-size: 0.8rem; color: var(--text-muted); margin-top: 12px; text-align: center; }
-.login-note span { color: var(--accent); cursor: pointer; }
-.close-login { float: right; background: none; border: none; color: var(--text-muted); cursor: pointer; font-size: 1.2rem; }
-.admin-hint {
-  font-size: 0.75rem; color: var(--text-muted);
-  text-align: center; margin-top: 16px; padding: 10px;
-  background: var(--bg-elevated); border-radius: 6px;
-}
-
-/* ===== TOAST ===== */
-.toast {
-  position: fixed; bottom: 24px; right: 24px;
-  background: var(--bg-card); border: 1px solid var(--border);
-  color: var(--text-primary); padding: 12px 20px; border-radius: 8px;
-  font-size: 0.9rem; z-index: 9999; transform: translateY(100px);
-  transition: transform 0.3s; max-width: 280px;
-  display: flex; align-items: center; gap: 8px;
-}
-.toast.show { transform: translateY(0); }
-.toast.success { border-color: var(--green); }
-.toast.error { border-color: var(--red); }
-
-/* ===== FOOTER ===== */
-footer {
-  background: var(--bg-secondary);
-  border-top: 1px solid var(--border);
-  padding: 24px; text-align: center;
-  color: var(--text-muted); font-size: 0.85rem;
-}
-
-/* ===== DIVIDER ===== */
-.divider { border: none; border-top: 1px solid var(--border); margin: 0; }
-
-/* ===== RESPONSIVE ===== */
-@media(max-width: 768px) {
-  .nav-links { display: none; }
-  .hero-stats { gap: 32px; }
-  .stat-num { font-size: 2rem; }
-  .products-grid { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
-}
-
-/* ===== EDIT MODAL ===== */
-.edit-overlay {
-  position: fixed; inset: 0; background: rgba(0,0,0,0.9);
-  z-index: 5000; display: none; align-items: center; justify-content: center; padding: 16px;
-}
-.edit-overlay.open { display: flex; }
-.edit-panel {
-  background: var(--bg-secondary); border: 1px solid var(--border);
-  border-radius: 16px; padding: 28px; width: 100%; max-width: 600px;
-  max-height: 85vh; overflow-y: auto;
-}
-.edit-panel h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 20px; }
+/* TOAST */
+.toast{position:fixed;bottom:6rem;right:2rem;background:#0f172a;color:white;padding:0.8rem 1.5rem;border-radius:10px;font-size:0.88rem;border-left:4px solid #4F6AF5;transform:translateY(80px);opacity:0;transition:all 0.3s;z-index:9998;font-family:'Inter',sans-serif}
+.toast.show{transform:translateY(0);opacity:1}
 </style>
 </head>
 <body>
 
-<!-- NAVBAR -->
+<!-- NAV -->
 <nav>
-  <a class="nav-logo" href="#" onclick="showPage('home')">MA Paints</a>
-  <ul class="nav-links">
-    <li><a href="#" onclick="showPage('home')">Home</a></li>
-    <li><a href="#" onclick="showPage('products')">Products</a></li>
-    <li><a href="#" onclick="showPage('payment')">Payment</a></li>
-    <li><a href="#" onclick="showPage('contact')">Contact</a></li>
-  </ul>
-  <div class="nav-right">
-    <button class="btn-login" onclick="openLogin()">Login / Sign Up</button>
-    <button class="cart-btn" onclick="toggleCart()">🛒 Cart <span id="cart-count">0</span></button>
+  <div class="nav-logo" onclick="showPage('hero')">
+    <div class="nav-logo-icon">MA</div>
+    <div>
+      <div class="nav-logo-text">Masha Allah</div>
+      <div class="nav-logo-sub">Paint Store</div>
+    </div>
   </div>
+  <ul class="nav-links">
+    <li><a href="#" onclick="showPage('hero');return false;">Brands</a></li>
+    <li><a href="#" onclick="showPage('products');return false;">Products</a></li>
+    <li><a href="#" onclick="document.getElementById('gallery-sec').scrollIntoView({behavior:'smooth'});showPage('hero');return false;">Projects</a></li>
+    <li><a href="#" onclick="document.getElementById('why-sec').scrollIntoView({behavior:'smooth'});showPage('hero');return false;">Why Us</a></li>
+    <li><a href="#" onclick="document.getElementById('contact-sec').scrollIntoView({behavior:'smooth'});showPage('hero');return false;">Contact</a></li>
+  </ul>
+  <button class="nav-cta" onclick="showPage('login')">Get a Quote</button>
 </nav>
 
-<!-- ========== HOME PAGE ========== -->
-<div id="page-home" class="page active">
+<!-- WHATSAPP FLOAT -->
+<a class="wa-float" href="https://wa.me/923024746351?text=Assalam o Alaikum! Masha Allah Paint Store se inquiry karna chahta hun." target="_blank">
+  <svg class="wa-icon" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  Muhammad Kashif
+</a>
+
+<!-- ═══ HOME PAGE ═══ -->
+<div id="hero-page" class="page active">
 
   <!-- HERO -->
-  <div class="hero">
+  <section class="hero">
+    <div class="hero-img"></div>
+    <div class="hero-bg"></div>
     <div class="hero-content">
-      <div class="hero-badge">Pakistan's Trusted Paint Store</div>
-      <h1>Color Your World<br>With <span>Confidence</span></h1>
-      <p>Masha Allah Paint Store — ghar, dukaan, aur factory ke liye behtareen quality paints.<br>Ek jagah har color, har brand, har zaroorat.</p>
+      <div class="hero-badge">⭐ Premium Quality Paints</div>
+      <h1 class="hero-title">Bring Your<br><span class="blue">Vision</span> <span class="purple">to Life.</span></h1>
+      <p class="hero-desc">Masha Allah Paint Store is your trusted destination for premium decorative coatings, industrial finishes, and expert color matching.</p>
       <div class="hero-btns">
-        <button class="btn-primary" onclick="showPage('products')">Browse Products</button>
-        <button class="btn-outline" onclick="showPage('contact')">Contact Us</button>
+        <button class="btn-blue" onclick="showPage('products')">Explore Products →</button>
+        <button class="btn-ghost" onclick="document.getElementById('contact-sec').scrollIntoView({behavior:'smooth'})">Get a Quote</button>
       </div>
       <div class="hero-stats">
-        <div class="stat"><div class="stat-num">500+</div><div class="stat-label">Paint Colors</div></div>
-        <div class="stat"><div class="stat-num">15+</div><div class="stat-label">Top Brands</div></div>
-        <div class="stat"><div class="stat-num">10yr</div><div class="stat-label">Experience</div></div>
+        <div><div class="stat-num">500+</div><div class="stat-label">Paint Colors</div></div>
+        <div><div class="stat-num">10yr+</div><div class="stat-label">Experience</div></div>
+        <div><div class="stat-num">1k+</div><div class="stat-label">Happy Customers</div></div>
       </div>
-      <div class="hero-features">
-        <div class="feat-pill">🚚 Free Home Delivery</div>
-        <div class="feat-pill">🎨 Color Matching</div>
-        <div class="feat-pill">✅ Original Brands</div>
-        <div class="feat-pill">💰 Best Market Price</div>
+    </div>
+  </section>
+
+  <!-- BRANDS -->
+  <div class="brands-strip">
+    <div class="brands-label">Authorized Dealer &amp; Stockist</div>
+    <div class="brands-row">
+      <div class="brand-logo">
+        <div class="gobis-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg>
+        </div>
+        <div>
+          <div class="brand-name-gobis">GOBIS <span>PAINTS</span></div>
+        </div>
+      </div>
+      <div class="brand-divider"></div>
+      <div class="brand-logo">
+        <div class="diamond-icon"><div class="diamond-shape"><div class="diamond-inner"></div></div></div>
+        <div>
+          <div class="brand-name-diamond">DIAMOND <span>PAINTS</span></div>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- ABOUT -->
-  <section style="background: var(--bg-secondary);">
-    <div class="section-header">
-      <div class="section-title">Bakhri Uch Sharif Ka Bharosa</div>
-      <div class="section-sub">10 saalon se zyada waqt se Pakistan mein trusted</div>
+  <!-- CATEGORIES -->
+  <div class="section">
+    <div style="text-align:center;margin-bottom:3rem;">
+      <h2 class="sec-title" style="text-align:center">Every Surface Covered</h2>
+      <p class="sec-sub" style="margin:0 auto;text-align:center">From durable exteriors that brave the elements to luxurious interior finishes that define your home's character.</p>
     </div>
-    <div class="about-grid">
-      <div class="about-text">
-        <p>10 saalon se zyada waqt se hum Bakhri aur aas paas ke ilaqon mein behtareen quality paints supply kar rahe hain.</p>
-        <p>Hamare paas <strong style="color:var(--accent)">Gobis Paints</strong> ke tamam products available hain — Interior, Exterior, Enamel, Primer sab kuch. Ghar se lekar industrial projects tak, har kaam ke liye sahi paint hum dete hain.</p>
-        <div class="gobis-badge">
-          <div class="brand">GOBIS</div>
-          <div style="color:var(--accent-dim);font-size:0.8rem;letter-spacing:2px;text-transform:uppercase;">PAINTS & COATINGS</div>
-          <p>Premium quality paints — Pakistan mein trusted brand</p>
+    <div class="cats-grid">
+      <div class="cat-card">
+        <img class="cat-img" src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80" alt="Interior">
+        <div class="cat-overlay">
+          <div class="cat-icon-wrap" style="background:rgba(245,158,11,0.2)">🏠</div>
+          <div class="cat-name">Interior Finishes</div>
+          <div class="cat-desc">Soft, warm tones with washable and durable properties for living spaces.</div>
         </div>
       </div>
-      <ul class="why-list">
-        <li class="why-item">
-          <span class="why-icon">🏆</span>
-          <div><div class="why-title">Original Products</div><div class="why-desc">Sirf asli Gobis products — koi duplicate nahi</div></div>
-        </li>
-        <li class="why-item">
-          <span class="why-icon">🚚</span>
-          <div><div class="why-title">Home Delivery</div><div class="why-desc">Ghar baithe order karein — delivery hum karein ge</div></div>
-        </li>
-        <li class="why-item">
-          <span class="why-icon">💰</span>
-          <div><div class="why-title">Best Price</div><div class="why-desc">Market se kam daam — quality mein koi compromise nahi</div></div>
-        </li>
-        <li class="why-item">
-          <span class="why-icon">📞</span>
-          <div><div class="why-title">Expert Advice</div><div class="why-desc">Kaun sa paint sahi hai? Hum bata dein ge — free mein</div></div>
-        </li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- ORDER CTA -->
-  <section style="text-align:center; padding: 60px 24px; background: linear-gradient(135deg, rgba(212,160,23,0.08) 0%, transparent 100%);">
-    <div class="section-title">Abhi Order Karein!</div>
-    <p style="color:var(--text-muted); margin: 12px 0 32px;">WhatsApp pe message karein — Muhammad Kashif khud jawab dein ge</p>
-    <a href="https://wa.me/923024746351?text=Assalam%20o%20Alaikum!%20Masha%20Allah%20Paint%20Store%20se%20paint%20lena%20chahta%20hun." target="_blank" class="btn-primary" style="font-size:1.1rem; padding: 16px 40px;">
-      <span style="font-size:1.2rem;">💬</span> WhatsApp Par Order Karein
-    </a>
-  </section>
-
-  <footer>© 2025 Masha Allah Paint Store — Bakhri Uch Sharif, Punjab, Pakistan. All rights reserved.</footer>
-</div>
-
-<!-- ========== PRODUCTS PAGE ========== -->
-<div id="page-products" class="page">
-  <section>
-    <div class="section-header">
-      <div class="section-title">Our Products</div>
-      <div class="section-sub">Top brands, best prices — sab kuch ek jagah</div>
-    </div>
-    <div class="filter-bar" id="filter-bar">
-      <button class="filter-btn active" onclick="filterProducts('all', this)">All Products</button>
-      <button class="filter-btn" onclick="filterProducts('interior', this)">Interior</button>
-      <button class="filter-btn" onclick="filterProducts('exterior', this)">Exterior</button>
-      <button class="filter-btn" onclick="filterProducts('enamel', this)">Enamel</button>
-      <button class="filter-btn" onclick="filterProducts('primer', this)">Primer & Sealer</button>
-    </div>
-    <div class="products-grid" id="products-grid"></div>
-  </section>
-  <footer>© 2025 Masha Allah Paint Store — Bakhri Uch Sharif, Punjab, Pakistan. All rights reserved.</footer>
-</div>
-
-<!-- ========== PAYMENT PAGE ========== -->
-<div id="page-payment" class="page">
-  <section>
-    <div class="section-header">
-      <div class="section-title">Payment Methods</div>
-      <div class="section-sub">Order karo — in tariqqon se payment karo</div>
-    </div>
-    <div class="payment-grid">
-
-      <!-- JazzCash -->
-      <div class="payment-card">
-        <div class="payment-logo jazzcash-logo">
-          <svg width="50" height="50" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect width="100" height="100" rx="20" fill="none"/>
-            <text x="10" y="55" font-size="14" font-weight="900" fill="white" font-family="Arial">Jazz</text>
-            <text x="10" y="75" font-size="11" font-weight="700" fill="white" font-family="Arial">Cash</text>
-            <circle cx="70" cy="40" r="18" fill="rgba(255,255,255,0.2)"/>
-            <text x="60" y="46" font-size="16" fill="white">₨</text>
-          </svg>
-        </div>
-        <div class="payment-name">JazzCash</div>
-        <div style="color:var(--text-muted);font-size:0.8rem;">Mobile Account</div>
-        <div class="payment-number">0302-4746351</div>
-        <div class="payment-holder">Muhammad Kashif</div>
-        <div style="margin-top:12px;">
-          <a href="https://wa.me/923024746351" target="_blank" style="color:var(--accent);font-size:0.82rem;text-decoration:none;">Payment ke baad screenshot bhejein →</a>
+      <div class="cat-card">
+        <img class="cat-img" src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=600&q=80" alt="Exterior">
+        <div class="cat-overlay">
+          <div class="cat-icon-wrap" style="background:rgba(79,106,245,0.2)">🌦️</div>
+          <div class="cat-name">Exterior Protection</div>
+          <div class="cat-desc">Weather-resistant formulas designed to protect your home's facade.</div>
         </div>
       </div>
-
-      <!-- Easypaisa -->
-      <div class="payment-card">
-        <div class="payment-logo easypaisa-logo">
-          <svg width="50" height="50" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect width="100" height="100" rx="20" fill="none"/>
-            <text x="8" y="48" font-size="12" font-weight="900" fill="white" font-family="Arial">easy</text>
-            <text x="8" y="66" font-size="12" font-weight="700" fill="white" font-family="Arial">paisa</text>
-            <path d="M68 25 L80 50 L68 75 L56 50 Z" fill="rgba(255,255,255,0.3)"/>
-          </svg>
-        </div>
-        <div class="payment-name">Easypaisa</div>
-        <div style="color:var(--text-muted);font-size:0.8rem;">Mobile Account</div>
-        <div class="payment-number">0302-4746351</div>
-        <div class="payment-holder">Muhammad Kashif</div>
-        <div style="margin-top:12px;">
-          <a href="https://wa.me/923024746351" target="_blank" style="color:var(--accent);font-size:0.82rem;text-decoration:none;">Payment ke baad screenshot bhejein →</a>
+      <div class="cat-card">
+        <img class="cat-img" src="https://images.unsplash.com/photo-1541123437800-1bb1317badc2?w=600&q=80" alt="Decorative">
+        <div class="cat-overlay">
+          <div class="cat-icon-wrap" style="background:rgba(124,58,237,0.2)">✨</div>
+          <div class="cat-name">Decorative Coatings</div>
+          <div class="cat-desc">Textured, metallic, and specialized finishes for statement walls.</div>
         </div>
       </div>
-
-      <!-- WhatsApp Order -->
-      <div class="payment-card">
-        <div class="payment-logo whatsapp-logo">
-          <svg width="46" height="46" viewBox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M23 2C11.4 2 2 11.4 2 23C2 26.9 3.1 30.6 5.1 33.7L2.2 43.8L12.6 41C15.6 42.8 19.2 43.9 23 43.9C34.6 43.9 44 34.5 44 22.9C44 11.4 34.6 2 23 2Z" fill="white"/>
-            <path d="M33.5 29.3C33 30.5 31 31.6 29.9 31.8C28.9 32 27.6 32.1 16.5 27.5C13.2 26.1 10.7 23.5 10.3 22.9C9.9 22.3 7 18.4 7 14.4C7 10.4 9.1 8.4 9.9 7.5C10.7 6.6 11.7 6.4 12.3 6.4C12.9 6.4 13.5 6.4 14 6.4C14.5 6.4 15.3 6.2 16 7.9C16.7 9.6 18.4 13.6 18.6 14C18.8 14.4 18.9 14.9 18.6 15.4C18.3 15.9 18.1 16.2 17.7 16.7C17.3 17.1 16.9 17.6 16.6 17.9C16.2 18.3 15.8 18.7 16.2 19.4C16.6 20.1 18.4 23 21.2 25.4C24.8 28.4 27.7 29.3 28.5 29.7C29.3 30.1 29.8 30 30.3 29.4C30.8 28.8 32.5 26.8 33.1 26C33.7 25.2 34.3 25.3 35.1 25.6C35.9 25.9 39.9 27.9 40.7 28.3C41.5 28.7 42 28.9 42.2 29.3C42.4 29.7 42.4 31.4 41.7 33.4" fill="#25D366"/>
-          </svg>
-        </div>
-        <div class="payment-name">WhatsApp Order</div>
-        <div style="color:var(--text-muted);font-size:0.8rem;">Direct Message</div>
-        <div class="payment-number">0302-4746351</div>
-        <div class="payment-holder">Muhammad Kashif</div>
-        <div style="margin-top:14px;">
-          <a href="https://wa.me/923024746351?text=Order%20karna%20chahta%20hun" target="_blank" class="btn-primary" style="font-size:0.85rem; padding: 8px 20px; display:inline-block;">Order Now</a>
-        </div>
-      </div>
-
-      <!-- Cash on Delivery -->
-      <div class="payment-card">
-        <div class="payment-logo cod-logo">
-          <svg width="46" height="46" viewBox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="3" y="12" width="40" height="26" rx="4" fill="white" opacity="0.9"/>
-            <rect x="3" y="18" width="40" height="8" fill="white" opacity="0.4"/>
-            <circle cx="23" cy="28" r="5" fill="rgba(100,100,100,0.5)"/>
-            <text x="19" y="32" font-size="8" font-weight="900" fill="white">₨</text>
-          </svg>
-        </div>
-        <div class="payment-name">Cash on Delivery</div>
-        <div style="color:var(--text-muted);font-size:0.8rem;">Ghar pe delivery — cash dein</div>
-        <div class="payment-number" style="color:var(--green);">Available</div>
-        <div class="payment-holder">Local area mein available</div>
-        <div style="margin-top:12px;font-size:0.8rem;color:var(--text-muted);">Order ke waqt batayein</div>
-      </div>
-
-    </div>
-    <div style="text-align:center; margin-top:32px; color:var(--text-muted); font-size:0.9rem;">
-      💡 Payment karne ke baad WhatsApp pe screenshot zaroor bhejein — 
-      <a href="https://wa.me/923024746351" target="_blank" style="color:var(--accent);">+92 302 4746351</a>
-    </div>
-  </section>
-  <footer>© 2025 Masha Allah Paint Store — Bakhri Uch Sharif, Punjab, Pakistan. All rights reserved.</footer>
-</div>
-
-<!-- ========== CONTACT PAGE ========== -->
-<div id="page-contact" class="page">
-  <section>
-    <div class="section-header">
-      <div class="section-title">Humse Raabta Karein</div>
-      <div class="section-sub">Koi bhi sawaal ho — paint selection se lekar price tak — hum hamesha available hain</div>
-    </div>
-    <div class="contact-grid">
-      <div class="contact-info">
-        <div class="info-card">
-          <span class="info-icon">📍</span>
-          <div>
-            <div class="info-label">Address</div>
-            <div class="info-value">Bakhri Chowk, P/O Nalka Adda,<br>Bakhri Uch Sharif, Punjab, Pakistan</div>
-          </div>
-        </div>
-        <div class="info-card">
-          <span class="info-icon">👤</span>
-          <div>
-            <div class="info-label">Proprietor</div>
-            <div class="info-value">Muhammad Kashif</div>
-          </div>
-        </div>
-        <div class="info-card">
-          <span class="info-icon">📞</span>
-          <div>
-            <div class="info-label">Phone / WhatsApp</div>
-            <div class="info-value"><a href="https://wa.me/923024746351">+92 302 4746351</a></div>
-          </div>
-        </div>
-        <div class="info-card">
-          <span class="info-icon">🕐</span>
-          <div>
-            <div class="info-label">Opening Hours</div>
-            <div class="info-value">Mon–Sat: 8am – 9pm<br>Sunday: 10am – 6pm</div>
-          </div>
-        </div>
-        <div class="info-card">
-          <span class="info-icon">📧</span>
-          <div>
-            <div class="info-label">Email</div>
-            <div class="info-value"><a href="mailto:info@mashallahpaints.pk">info@mashallahpaints.pk</a></div>
-          </div>
-        </div>
-      </div>
-      <div class="contact-form">
-        <h3 style="font-size:1.1rem;font-weight:700;margin-bottom:20px;">Message Bhejein</h3>
-        <div class="form-group">
-          <label>Aap ka Naam</label>
-          <input type="text" placeholder="Apna naam likhein">
-        </div>
-        <div class="form-group">
-          <label>Phone Number</label>
-          <input type="tel" placeholder="03XX-XXXXXXX">
-        </div>
-        <div class="form-group">
-          <label>Email (optional)</label>
-          <input type="email" placeholder="email@example.com">
-        </div>
-        <div class="form-group">
-          <label>Kya Chahiye?</label>
-          <select>
-            <option>Paint Selection Help</option>
-            <option>Price Inquiry</option>
-            <option>Bulk Order</option>
-            <option>Delivery Query</option>
-            <option>Complaint / Feedback</option>
-            <option>Other</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label>Message</label>
-          <textarea placeholder="Apna sawaal likhein..."></textarea>
-        </div>
-        <button class="btn-primary" style="width:100%;" onclick="submitContact()">Message Bhejein ✉️</button>
-      </div>
-    </div>
-  </section>
-  <footer>© 2025 Masha Allah Paint Store — Bakhri Uch Sharif, Punjab, Pakistan. All rights reserved.</footer>
-</div>
-
-<!-- ========== CART SIDEBAR ========== -->
-<div class="cart-overlay" id="cart-overlay" onclick="handleCartOverlay(event)">
-  <div class="cart-panel">
-    <div class="cart-header">
-      <h3>🛒 Tumhara Cart</h3>
-      <button class="close-cart" onclick="toggleCart()">✕</button>
-    </div>
-    <div class="cart-items" id="cart-items-container">
-      <div class="cart-empty">Cart khali hai — koi product add karein</div>
-    </div>
-    <div class="cart-footer">
-      <div class="cart-total">
-        <span>Total</span>
-        <span id="cart-total-price">Rs. 0</span>
-      </div>
-      <button class="whatsapp-order" onclick="orderOnWhatsapp()">
-        💬 WhatsApp Par Order Karein
-      </button>
     </div>
   </div>
-</div>
 
-<!-- ========== ADMIN PANEL ========== -->
-<div class="admin-overlay" id="admin-overlay">
-  <div class="admin-panel">
-    <div class="admin-header">
-      <h2>⚙️ Admin Panel</h2>
-      <button class="close-admin" onclick="closeAdmin()">✕ Close</button>
-    </div>
-    <div class="admin-tabs">
-      <button class="admin-tab active" onclick="adminTab('add', this)">➕ Product Add Karein</button>
-      <button class="admin-tab" onclick="adminTab('list', this)">📋 Products List</button>
-    </div>
-    <div class="admin-content">
-      <!-- ADD PRODUCT -->
-      <div class="admin-tab-pane active" id="tab-add">
-        <div class="form-grid">
-          <div class="admin-form-group">
-            <label>Product Ka Naam *</label>
-            <input type="text" id="ap-name" placeholder="e.g. Silk Sheen Vinyl Emulsion">
+  <!-- EXPERTISE -->
+  <div class="expertise" id="why-sec">
+    <div class="exp-grid">
+      <div class="exp-img-wrap">
+        <img class="exp-img" src="https://images.unsplash.com/photo-1513519245088-0e12902e5a38?w=700&q=80" alt="Color swatches">
+        <div class="exp-badge-float">
+          <div class="exp-badge-num">500+</div>
+          <div class="exp-badge-text">Colors available to mix instantly in-store.</div>
+        </div>
+      </div>
+      <div>
+        <p class="sec-label">Why Choose Us</p>
+        <h2 class="sec-title">More Than Just Paint.<br><span style="color:#4F6AF5">Expertise You Can Trust.</span></h2>
+        <p class="sec-sub">Chahe aap ghar ko naya rang dena chahein ya commercial project ho — hum best products aur advice ke saath hamesha taiyaar hain.</p>
+        <div class="exp-list">
+          <div class="exp-item">
+            <div class="exp-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+            <div><div class="exp-item-title">Color Matching Service</div><div class="exp-item-sub">Koi bhi shade le aain — hum exactly match karein ge using advanced techniques.</div></div>
           </div>
-          <div class="admin-form-group">
-            <label>Brand *</label>
-            <input type="text" id="ap-brand" placeholder="e.g. Gobis Paints">
+          <div class="exp-item">
+            <div class="exp-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+            <div><div class="exp-item-title">Expert Technical Advice</div><div class="exp-item-sub">Kaun sa paint kahan lagaye — Muhammad Kashif khud guide karein ge.</div></div>
           </div>
-          <div class="admin-form-group">
-            <label>Category *</label>
-            <select id="ap-category">
-              <option value="interior">Interior</option>
-              <option value="exterior">Exterior</option>
-              <option value="enamel">Enamel</option>
-              <option value="primer">Primer & Sealer</option>
-            </select>
+          <div class="exp-item">
+            <div class="exp-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+            <div><div class="exp-item-title">Bulk Order Discount</div><div class="exp-item-sub">Contractors aur builders ke liye special rates — baat karein WhatsApp pe.</div></div>
           </div>
-          <div class="admin-form-group">
-            <label>Badge (e.g. Best Seller, Popular)</label>
-            <input type="text" id="ap-badge" placeholder="Best Seller">
-          </div>
-          <div class="admin-form-group">
-            <label>Price Min (Rs.) *</label>
-            <input type="number" id="ap-price-min" placeholder="600">
-          </div>
-          <div class="admin-form-group">
-            <label>Price Max (Rs.) *</label>
-            <input type="number" id="ap-price-max" placeholder="8900">
-          </div>
-          <div class="admin-form-group full-width">
-            <label>Description</label>
-            <textarea id="ap-desc" placeholder="Product ki khasiyat likhein..."></textarea>
-          </div>
-          <hr class="form-divider">
-          <div class="admin-form-group full-width">
-            <label>Product Ki Tasveer Upload Karein</label>
-            <div class="img-upload-area" id="img-upload-area">
-              <input type="file" accept="image/*" id="ap-img" onchange="previewImage(this)">
-              <div id="img-upload-text">
-                <div style="font-size:2rem; margin-bottom:8px;">📷</div>
-                <div style="font-size:0.9rem;color:var(--text-muted);">Click ya drag karein image yahan</div>
-                <div style="font-size:0.78rem;color:var(--text-muted);margin-top:4px;">JPG, PNG, WEBP — max 5MB</div>
-              </div>
-              <img id="img-preview" class="img-preview">
-            </div>
-          </div>
-          <div class="admin-form-group full-width">
-            <label>Ya Image URL paste karein</label>
-            <input type="url" id="ap-img-url" placeholder="https://example.com/image.jpg" oninput="previewImageUrl(this)">
-          </div>
-          <div class="admin-form-group full-width" style="margin-top:8px;">
-            <button class="btn-primary" style="width:100%;" onclick="addProduct()">✅ Product Add Karein</button>
+          <div class="exp-item">
+            <div class="exp-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+            <div><div class="exp-item-title">Home Delivery Available</div><div class="exp-item-sub">Bakhri aur aas paas ke ilaqon mein fast delivery ka intezaam.</div></div>
           </div>
         </div>
       </div>
-      <!-- PRODUCTS LIST -->
-      <div class="admin-tab-pane" id="tab-list">
-        <div class="admin-product-list" id="admin-product-list"></div>
+    </div>
+  </div>
+
+  <!-- GALLERY -->
+  <div class="section" id="gallery-sec">
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:2.5rem;">
+      <div>
+        <p class="sec-label">Our Projects</p>
+        <h2 class="sec-title" style="margin-bottom:0">Inspiration Gallery</h2>
+        <p class="sec-sub">See how our premium paints transform ordinary spaces into extraordinary environments.</p>
+      </div>
+    </div>
+    <div class="gallery-grid">
+      <div class="gal-card">
+        <img class="gal-img" src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&q=80" alt="Commercial">
+        <div class="gal-overlay">
+          <div class="gal-tag">Commercial Project</div>
+          <div class="gal-title">Modern Business Complex</div>
+        </div>
+      </div>
+      <div class="gal-card">
+        <img class="gal-img" src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&q=80" alt="Villa">
+        <div class="gal-overlay">
+          <div class="gal-tag" style="color:#C084FC">Residential Project</div>
+          <div class="gal-title">Luxury Villa Interior</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- REVIEWS -->
+  <div class="reviews">
+    <div style="text-align:center;margin-bottom:1rem;">
+      <h2 style="font-size:2rem;font-weight:800;color:#1a1a2e">Trusted by Professionals</h2>
+      <p style="color:#888;font-size:0.95rem;margin-top:0.5rem">Hear what contractors and homeowners have to say about our products and service.</p>
+    </div>
+    <div class="reviews-grid">
+      <div class="rev-card">
+        <div class="rev-quote">"</div>
+        <div class="rev-stars">★★★★★</div>
+        <div class="rev-text">Masha Allah Paint Store pe hamesha original products milte hain. Muhammad Kashif bhai ne mujhe bilkul sahi paint suggest kiya — kaam lajawaab nikla!</div>
+        <div class="rev-author">
+          <div class="rev-avatar" style="background:#4F6AF5">T</div>
+          <div><div class="rev-name">Tariq Mehmood</div><div class="rev-role">Commercial Contractor, Bakhri</div></div>
+        </div>
+      </div>
+      <div class="rev-card">
+        <div class="rev-quote">"</div>
+        <div class="rev-stars">★★★★★</div>
+        <div class="rev-text">Gobis Weather Protector lagwaya ghar pe — 2 saal ho gaye, rang bilkul fresh hai. Qeemat bhi market se kam thi. Highly recommend!</div>
+        <div class="rev-author">
+          <div class="rev-avatar" style="background:#7C3AED">Z</div>
+          <div><div class="rev-name">Zubair Ahmed</div><div class="rev-role">Homeowner, Uch Sharif</div></div>
+        </div>
+      </div>
+      <div class="rev-card">
+        <div class="rev-quote">"</div>
+        <div class="rev-stars">★★★★★</div>
+        <div class="rev-text">Main interior designer hun aur mujhe reliable supplier chahiye tha. Masha Allah Store mein Gobis ki poori range milti hai aur service bhi aali darje ki hai!</div>
+        <div class="rev-author">
+          <div class="rev-avatar" style="background:#059669">A</div>
+          <div><div class="rev-name">Asma Bibi</div><div class="rev-role">Interior Designer, Multan</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTACT DARK -->
+  <div class="contact-dark" id="contact-sec">
+    <h2>Ready to transform your space?</h2>
+    <p class="sub">Visit our store today or send us a message on WhatsApp for inquiries, pricing, and orders.</p>
+    <div class="contact-cards">
+      <div class="cc">
+        <div class="cc-icon" style="background:rgba(79,106,245,0.15)">📍</div>
+        <h3>Visit Our Store</h3>
+        <p>Bakhri Chowk, P/O Nalka Adda<br>Bakhri Uch Sharif, Punjab, Pakistan<br><br>Mon–Sat: 8:00 AM – 9:00 PM<br>Sunday: 10:00 AM – 6:00 PM</p>
+        <button class="cc-btn" onclick="window.open('https://maps.google.com/?q=Bakhri+Uch+Sharif+Punjab+Pakistan','_blank')">Get Directions →</button>
+      </div>
+      <div class="cc">
+        <div class="cc-icon" style="background:rgba(37,211,102,0.15)">📞</div>
+        <h3>Call or Message</h3>
+        <p>Muhammad Kashif<br>+92 302 4746351<br><br>Mon–Sat: 8:00 AM – 9:00 PM<br>Sunday: 10:00 AM – 6:00 PM</p>
+        <button class="cc-btn cc-btn-green" onclick="window.open('https://wa.me/923024746351?text=Assalam o Alaikum! Inquiry karna chahta hun.','_blank')">
+          <svg style="width:16px;height:16px;vertical-align:-3px;margin-right:6px;fill:white" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Chat on WhatsApp
+        </button>
+      </div>
+    </div>
+    <!-- PAYMENT -->
+    <div class="payment-section">
+      <div class="pay-title">Payment Methods</div>
+      <div class="pay-cards">
+        <div class="pay-card">
+          <div style="width:52px;height:52px;background:#E8490F;border-radius:12px;display:flex;align-items:center;justify-content:center;margin:0 auto 0.8rem;font-size:1.5rem">📱</div>
+          <div class="pay-name" style="color:#E8490F">JazzCash</div>
+          <div class="pay-num" style="background:rgba(232,73,15,0.1);color:#E8490F">0302-4746351</div>
+          <div class="pay-owner" style="color:#64748b">Muhammad Kashif</div>
+        </div>
+        <div class="pay-card">
+          <div style="width:52px;height:52px;background:#4CAF50;border-radius:12px;display:flex;align-items:center;justify-content:center;margin:0 auto 0.8rem;font-size:1.5rem">💚</div>
+          <div class="pay-name" style="color:#4CAF50">Easypaisa</div>
+          <div class="pay-num" style="background:rgba(76,175,80,0.1);color:#2E7D32">0302-4746351</div>
+          <div class="pay-owner" style="color:#64748b">Muhammad Kashif</div>
+        </div>
+        <div class="pay-card">
+          <div style="width:52px;height:52px;background:#F59E0B;border-radius:12px;display:flex;align-items:center;justify-content:center;margin:0 auto 0.8rem;font-size:1.5rem">💵</div>
+          <div class="pay-name" style="color:#F59E0B">Cash on Delivery</div>
+          <div class="pay-num" style="background:rgba(245,158,11,0.1);color:#B45309;font-size:0.78rem">Delivery pe cash dein</div>
+          <div class="pay-owner" style="color:#64748b">Local area available</div>
+        </div>
+      </div>
+      <div style="text-align:center;margin-top:1.2rem;font-size:0.82rem;color:#475569;">
+        💡 Payment ke baad WhatsApp pe screenshot zaroor bhejein — <span style="color:#4F6AF5">+92 302 4746351</span>
+      </div>
+    </div>
+  </div>
+
+  <footer>&copy; 2025 <span>Masha Allah Paint Store</span> — Bakhri Uch Sharif, Punjab, Pakistan. All rights reserved.</footer>
+</div>
+
+<!-- ═══ PRODUCTS PAGE ═══ -->
+<div id="products-page" class="page">
+  <div class="prod-hero">
+    <h1>Our Products</h1>
+    <p>Gobis Paints — Pakistan ka trusted brand, har zaroorat ke liye</p>
+  </div>
+  <div class="prod-section">
+    <div class="filter-bar">
+      <button class="filter-btn active" onclick="filterProducts('all',this)">All Products</button>
+      <button class="filter-btn" onclick="filterProducts('interior',this)">Interior</button>
+      <button class="filter-btn" onclick="filterProducts('exterior',this)">Exterior</button>
+      <button class="filter-btn" onclick="filterProducts('enamel',this)">Enamel</button>
+      <button class="filter-btn" onclick="filterProducts('primer',this)">Primer & Sealer</button>
+    </div>
+    <div class="cart-bar" id="cart-bar">
+      <span>🛒 Cart: <span id="cart-count">0</span> items — Total: <span style="color:#818CF8;font-weight:700">Rs. <span id="cart-total">0</span></span></span>
+      <div style="display:flex;gap:8px;">
+        <button onclick="viewCart()" style="background:#4F6AF5;color:white;border:none;padding:0.4rem 1rem;border-radius:6px;font-weight:600;cursor:pointer;font-size:0.85rem;">View Cart</button>
+        <button onclick="orderWhatsApp()" style="background:#25D366;color:white;border:none;padding:0.4rem 1rem;border-radius:6px;font-weight:600;cursor:pointer;font-size:0.85rem;">Order on WhatsApp 📲</button>
+        <button onclick="clearCart()" style="background:transparent;color:#aaa;border:1px solid #334155;padding:0.4rem 0.8rem;border-radius:6px;cursor:pointer;font-size:0.8rem;">Clear</button>
+      </div>
+    </div>
+    <div class="cart-modal" id="cart-modal">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;">
+        <h3 style="font-size:1.2rem;font-weight:700">Tumhara Cart</h3>
+        <button onclick="document.getElementById('cart-modal').style.display='none'" style="background:none;border:none;font-size:1.2rem;cursor:pointer;">✕</button>
+      </div>
+      <div id="cart-items-list"></div>
+      <div style="border-top:1px solid #f0f0f0;margin-top:1rem;padding-top:1rem;display:flex;justify-content:space-between;align-items:center;">
+        <span style="font-weight:600">Total: <span style="color:#4F6AF5">Rs. <span id="cart-total-modal">0</span></span></span>
+        <button onclick="orderWhatsApp()" style="background:#25D366;color:white;border:none;padding:0.6rem 1.2rem;border-radius:8px;font-weight:600;cursor:pointer;">Order on WhatsApp 📲</button>
+      </div>
+    </div>
+    <div class="products-grid" id="productsGrid"></div>
+  </div>
+  <footer>&copy; 2025 <span>Masha Allah Paint Store</span> — Bakhri Uch Sharif, Punjab, Pakistan. All rights reserved.</footer>
+</div>
+
+<!-- ═══ LOGIN PAGE ═══ -->
+<div id="login-page" class="page">
+  <div class="login-wrap">
+    <div class="login-left">
+      <div class="login-logo">MA</div>
+      <h2>Masha Allah Paint Store</h2>
+      <p>Account bana kar exclusive deals, order history aur color tips pao!</p>
+      <div style="display:flex;gap:6px;margin-top:1rem">
+        <div style="height:5px;width:30px;border-radius:3px;background:rgba(255,255,255,0.4)"></div>
+        <div style="height:5px;width:30px;border-radius:3px;background:rgba(255,255,255,0.6)"></div>
+        <div style="height:5px;width:30px;border-radius:3px;background:white"></div>
+      </div>
+    </div>
+    <div class="login-right">
+      <h3>Welcome Back!</h3>
+      <p class="sub">Apna account access karein</p>
+      <div class="tabs">
+        <button class="tab-btn active" id="loginTab" onclick="switchTab('login')">Login</button>
+        <button class="tab-btn" id="signupTab" onclick="switchTab('signup')">Sign Up</button>
+      </div>
+      <div id="loginForm">
+        <div class="form-group"><label>Phone / Email</label><input type="text" placeholder="0302-4746351 ya email"></div>
+        <div class="form-group"><label>Password</label><input type="password" placeholder="••••••••"></div>
+        <div style="font-size:0.8rem;color:#4F6AF5;text-align:right;margin:-0.5rem 0 1rem;cursor:pointer">Password bhool gaye?</div>
+        <button class="login-btn" onclick="fakeLogin()">Login</button>
+      </div>
+      <div id="signupForm" style="display:none">
+        <div class="form-group"><label>Poora Naam</label><input type="text" placeholder="Muhammad Ali"></div>
+        <div class="form-group"><label>Phone Number</label><input type="text" placeholder="+92 300 0000000"></div>
+        <div class="form-group"><label>Password</label><input type="password" placeholder="Strong password likhein"></div>
+        <button class="login-btn" onclick="fakeSignup()">Account Banao</button>
       </div>
     </div>
   </div>
 </div>
 
-<!-- ========== LOGIN MODAL ========== -->
-<div class="login-overlay" id="login-overlay" onclick="handleLoginOverlay(event)">
-  <div class="login-panel" id="login-panel">
-    <button class="close-login" onclick="closeLogin()">✕</button>
-    <div id="login-form-view">
-      <h2>Welcome Back!</h2>
-      <p>Apna account access karein</p>
-      <div class="form-group">
-        <label style="font-size:0.82rem;color:var(--text-muted);display:block;margin-bottom:6px;">Phone / Email</label>
-        <input type="text" id="login-user" placeholder="Phone ya Email">
-      </div>
-      <div class="form-group">
-        <label style="font-size:0.82rem;color:var(--text-muted);display:block;margin-bottom:6px;">Password</label>
-        <input type="password" id="login-pass" placeholder="Password">
-      </div>
-      <button class="btn-primary" style="width:100%;" onclick="doLogin()">Login</button>
-      <p class="login-note">Account nahi hai? <span onclick="showSignup()">Sign Up karein</span></p>
-      <div class="admin-hint">
-        🔐 Admin access ke liye:<br>Username: <strong>admin</strong> | Password: <strong>admin123</strong>
-      </div>
-    </div>
-    <div id="signup-form-view" style="display:none;">
-      <h2>Account Banao</h2>
-      <p>New account register karein</p>
-      <div class="form-group">
-        <label style="font-size:0.82rem;color:var(--text-muted);display:block;margin-bottom:6px;">Poora Naam</label>
-        <input type="text" placeholder="Apna naam likhein">
-      </div>
-      <div class="form-group">
-        <label style="font-size:0.82rem;color:var(--text-muted);display:block;margin-bottom:6px;">Phone Number</label>
-        <input type="tel" placeholder="03XX-XXXXXXX">
-      </div>
-      <div class="form-group">
-        <label style="font-size:0.82rem;color:var(--text-muted);display:block;margin-bottom:6px;">Password</label>
-        <input type="password" placeholder="Password banayein">
-      </div>
-      <button class="btn-primary" style="width:100%;" onclick="showToast('Account ban gaya! Login karein.', 'success'); closeLogin();">Account Banao</button>
-      <p class="login-note">Account hai? <span onclick="showLogin()">Login karein</span></p>
-    </div>
-  </div>
-</div>
-
-<!-- EDIT PRODUCT MODAL -->
-<div class="edit-overlay" id="edit-overlay">
-  <div class="edit-panel">
-    <h3>✏️ Product Edit Karein</h3>
-    <input type="hidden" id="edit-id">
-    <div class="form-grid">
-      <div class="admin-form-group">
-        <label>Product Naam</label>
-        <input type="text" id="edit-name">
-      </div>
-      <div class="admin-form-group">
-        <label>Brand</label>
-        <input type="text" id="edit-brand">
-      </div>
-      <div class="admin-form-group">
-        <label>Category</label>
-        <select id="edit-category">
-          <option value="interior">Interior</option>
-          <option value="exterior">Exterior</option>
-          <option value="enamel">Enamel</option>
-          <option value="primer">Primer & Sealer</option>
-        </select>
-      </div>
-      <div class="admin-form-group">
-        <label>Badge</label>
-        <input type="text" id="edit-badge">
-      </div>
-      <div class="admin-form-group">
-        <label>Price Min (Rs.)</label>
-        <input type="number" id="edit-price-min">
-      </div>
-      <div class="admin-form-group">
-        <label>Price Max (Rs.)</label>
-        <input type="number" id="edit-price-max">
-      </div>
-      <div class="admin-form-group full-width">
-        <label>Description</label>
-        <textarea id="edit-desc"></textarea>
-      </div>
-      <div class="admin-form-group full-width">
-        <label>Image URL</label>
-        <input type="url" id="edit-img-url" placeholder="https://...">
-      </div>
-      <div class="admin-form-group full-width">
-        <label>Ya Nai Tasveer Upload Karein</label>
-        <div class="img-upload-area">
-          <input type="file" accept="image/*" id="edit-img" onchange="previewEditImage(this)">
-          <div style="font-size:0.85rem;color:var(--text-muted);">Click karein ya image drag karein</div>
-          <img id="edit-img-preview" class="img-preview">
-        </div>
-      </div>
-      <div class="admin-form-group full-width" style="display:flex;gap:12px;margin-top:8px;">
-        <button class="btn-primary" style="flex:1;" onclick="saveEdit()">💾 Changes Save Karein</button>
-        <button class="btn-outline" style="flex:1;" onclick="closeEdit()">Cancel</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- TOAST -->
 <div class="toast" id="toast"></div>
 
 <script>
-// ===== STATE =====
-let products = JSON.parse(localStorage.getItem('maProducts') || 'null') || [
-  {id:1, name:"Silk Sheen Vinyl Emulsion", brand:"Gobis Paints", category:"interior", badge:"Best Seller", priceMin:600, priceMax:8900, desc:"Smooth silk finish. Interior walls ke liye perfect.", img:"", emoji:"🎨"},
-  {id:2, name:"Weather Protector", brand:"Gobis Paints", category:"exterior", badge:"Popular", priceMin:1080, priceMax:16800, desc:"All-weather protection. Exterior ke liye behtareen.", img:"", emoji:"🌦️"},
-  {id:3, name:"Gold Weather Guard", brand:"Gobis Paints", category:"exterior", badge:"Premium", priceMin:1080, priceMax:16800, desc:"Premium grade weather guard — lamba chalega.", img:"", emoji:"🥇"},
-  {id:4, name:"Gloss Finish Enamel", brand:"Gobis Paints", category:"enamel", badge:"", priceMin:655, priceMax:17400, desc:"High gloss enamel — doors, windows, furniture ke liye.", img:"", emoji:"💎"},
+const products=[
+  {name:"Aqueous Matt Finish",brand:"Gobis",price:"Rs. 850–2,250",priceNum:1550,cat:"interior",bg:"#EAF3DE",emoji:"🎨",badge:"Popular",desc:"Washable matte finish"},
+  {name:"Plastic Emulsion",brand:"Gobis",price:"Rs. 600–8,900",priceNum:1800,cat:"interior",bg:"#EEF2FF",emoji:"🖌️",badge:"",desc:"High opacity interior"},
+  {name:"Silk Sheen Vinyl Emulsion",brand:"Gobis",price:"Rs. 600–8,900",priceNum:2200,cat:"interior",bg:"#FEF9E7",emoji:"✨",badge:"Best Seller",desc:"Smooth silky finish"},
+  {name:"Armour Distemper",brand:"Gobis",price:"Rs. 850–2,250",priceNum:950,cat:"interior",bg:"#F5F0EA",emoji:"🏠",badge:"Economical",desc:"Budget interior coat"},
+  {name:"Weather Protector",brand:"Gobis",price:"Rs. 1,080–16,800",priceNum:3500,cat:"exterior",bg:"#EBF5FB",emoji:"🌦️",badge:"Best Seller",desc:"Anti-fungal exterior"},
+  {name:"Gold Weather Guard",brand:"Gobis",price:"Rs. 1,080–16,800",priceNum:4200,cat:"exterior",bg:"#FAEEDA",emoji:"🥇",badge:"Premium",desc:"High performance exterior"},
+  {name:"Gloss Finish Enamel",brand:"Gobis",price:"Rs. 655–17,400",priceNum:1800,cat:"enamel",bg:"#F5EEF8",emoji:"💎",badge:"",desc:"Wood & metal gloss"},
+  {name:"Matt Finish Enamel",brand:"Gobis",price:"Rs. 655–17,400",priceNum:1700,cat:"enamel",bg:"#FAECE7",emoji:"🖼️",badge:"",desc:"Satin/matt enamel"},
+  {name:"Red Oxide Primer",brand:"Gobis",price:"Rs. 655–17,400",priceNum:1200,cat:"enamel",bg:"#FCEBEB",emoji:"🔩",badge:"Anti-rust",desc:"Metal rust protection"},
+  {name:"Wall Sealer / Primer",brand:"Gobis",price:"Rs. 850–2,250",priceNum:1100,cat:"primer",bg:"#EAF7F4",emoji:"🪣",badge:"",desc:"Water & oil based"},
+  {name:"Sona Lappi (Wall Putty)",brand:"Gobis",price:"Rs. 850–2,250",priceNum:900,cat:"primer",bg:"#F8F9FA",emoji:"🪨",badge:"",desc:"Crack filler & leveler"},
 ];
-let cart = [];
-let nextId = products.length > 0 ? Math.max(...products.map(p=>p.id)) + 1 : 1;
-let currentEditImg = '';
-let addImgData = '';
+let currentFilter='all',cart=[];
 
-function saveProducts() { localStorage.setItem('maProducts', JSON.stringify(products)); }
-
-// ===== NAVIGATION =====
-function showPage(p) {
-  document.querySelectorAll('.page').forEach(el => el.classList.remove('active'));
-  document.getElementById('page-'+p).classList.add('active');
-  window.scrollTo(0,0);
-  if(p==='products') renderProducts();
-}
-
-// ===== PRODUCTS RENDER =====
-function renderProducts(filter='all') {
-  const grid = document.getElementById('products-grid');
-  const filtered = filter==='all' ? products : products.filter(p=>p.category===filter);
-  if(filtered.length===0) {
-    grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;color:var(--text-muted);padding:60px 0;">Is category mein koi product nahi hai</div>`;
-    return;
-  }
-  grid.innerHTML = filtered.map(p => `
-    <div class="product-card" data-category="${p.category}">
-      ${p.badge ? `<div class="product-badge">${p.badge}</div>` : ''}
-      <div class="product-img">
-        ${p.img ? `<img src="${p.img}" alt="${p.name}" onerror="this.style.display='none';this.nextSibling.style.display='flex'">
-        <div class="product-img-placeholder" style="display:none">${p.emoji||'🎨'}</div>` 
-        : `<div class="product-img-placeholder">${p.emoji||'🎨'}</div>`}
+function renderProducts(filter){
+  const grid=document.getElementById('productsGrid');
+  const filtered=filter==='all'?products:products.filter(p=>p.cat===filter);
+  grid.innerHTML=filtered.map(p=>`
+    <div class="product-card">
+      <div class="product-img" style="background:${p.bg}">
+        <span style="font-size:3rem">${p.emoji}</span>
+        ${p.badge?`<span class="product-badge">${p.badge}</span>`:''}
       </div>
       <div class="product-info">
-        <div class="product-brand">${p.brand}</div>
         <div class="product-name">${p.name}</div>
-        <div class="product-desc">${p.desc||''}</div>
-        <div class="product-price">Rs. <span>${p.priceMin.toLocaleString()}</span> – Rs. ${p.priceMax.toLocaleString()}</div>
-        <button class="add-to-cart" onclick="addToCart(${p.id})">🛒 Cart Mein Add Karein</button>
+        <div class="product-brand">${p.brand}</div>
+        <div class="product-desc">${p.desc}</div>
+        <div class="product-footer">
+          <span class="product-price">${p.price}</span>
+          <button class="add-btn" onclick="addToCart('${p.name}',${p.priceNum})">+ Cart</button>
+        </div>
       </div>
-    </div>
-  `).join('');
+    </div>`).join('');
 }
 
-function filterProducts(cat, btn) {
+function filterProducts(cat,btn){
+  currentFilter=cat;
   document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');
   renderProducts(cat);
 }
 
-// ===== CART =====
-function addToCart(id) {
-  const p = products.find(x=>x.id===id);
-  if(!p) return;
-  const existing = cart.find(x=>x.id===id);
-  if(existing) { existing.qty++; }
-  else { cart.push({...p, qty:1}); }
-  updateCart();
-  showToast(`"${p.name}" cart mein add ho gaya!`, 'success');
+function addToCart(name,price){
+  const ex=cart.find(i=>i.name===name);
+  if(ex){ex.qty++;}else{cart.push({name,price,qty:1});}
+  updateCartUI();
+  showToast('🛒 "'+name+'" cart mein add ho gaya!');
 }
 
-function updateCart() {
-  const count = cart.reduce((s,i)=>s+i.qty,0);
-  document.getElementById('cart-count').textContent = count;
-  const total = cart.reduce((s,i)=>s+(i.priceMin*i.qty),0);
-  document.getElementById('cart-total-price').textContent = 'Rs. '+total.toLocaleString();
-  const container = document.getElementById('cart-items-container');
-  if(cart.length===0) {
-    container.innerHTML = '<div class="cart-empty">Cart khali hai — koi product add karein</div>';
-    return;
-  }
-  container.innerHTML = cart.map(item => `
-    <div class="cart-item">
-      <div class="cart-item-img">
-        ${item.img ? `<img src="${item.img}" alt="${item.name}" onerror="this.style.display='none';this.parentElement.innerHTML='${item.emoji||'🎨'}'">` : (item.emoji||'🎨')}
+function updateCartUI(){
+  const total=cart.reduce((s,i)=>s+i.price*i.qty,0);
+  const count=cart.reduce((s,i)=>s+i.qty,0);
+  document.getElementById('cart-count').textContent=count;
+  document.getElementById('cart-total').textContent=total.toLocaleString();
+  document.getElementById('cart-total-modal').textContent=total.toLocaleString();
+  const bar=document.getElementById('cart-bar');
+  if(count>0){bar.classList.add('show');}else{bar.classList.remove('show');}
+  renderCartItems();
+}
+
+function renderCartItems(){
+  const list=document.getElementById('cart-items-list');
+  if(!list)return;
+  if(cart.length===0){list.innerHTML='<p style="color:#888;font-size:0.9rem">Cart khali hai</p>';return;}
+  list.innerHTML=cart.map(i=>`
+    <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid #f5f5f5">
+      <span style="font-size:0.88rem">${i.name}</span>
+      <div style="display:flex;align-items:center;gap:8px">
+        <button onclick="changeQty('${i.name}',-1)" style="width:24px;height:24px;border-radius:50%;border:1px solid #ddd;background:white;cursor:pointer">−</button>
+        <span style="font-size:0.88rem;font-weight:600">${i.qty}</span>
+        <button onclick="changeQty('${i.name}',1)" style="width:24px;height:24px;border-radius:50%;border:1px solid #ddd;background:white;cursor:pointer">+</button>
+        <span style="font-size:0.82rem;color:#4F6AF5;min-width:80px;text-align:right">Rs. ${(i.price*i.qty).toLocaleString()}</span>
       </div>
-      <div class="cart-item-info">
-        <div class="cart-item-name">${item.name}</div>
-        <div class="cart-item-price">Rs. ${item.priceMin.toLocaleString()} each</div>
-        <div class="qty-controls">
-          <button class="qty-btn" onclick="changeQty(${item.id},-1)">−</button>
-          <span class="qty-num">${item.qty}</span>
-          <button class="qty-btn" onclick="changeQty(${item.id},1)">+</button>
-          <button class="remove-btn" onclick="removeFromCart(${item.id})">🗑️ Remove</button>
-        </div>
-      </div>
-    </div>
-  `).join('');
+    </div>`).join('');
 }
 
-function changeQty(id, delta) {
-  const item = cart.find(x=>x.id===id);
-  if(!item) return;
-  item.qty += delta;
-  if(item.qty<=0) removeFromCart(id);
-  else updateCart();
+function changeQty(name,delta){
+  const item=cart.find(i=>i.name===name);
+  if(!item)return;
+  item.qty+=delta;
+  if(item.qty<=0)cart=cart.filter(i=>i.name!==name);
+  updateCartUI();
 }
 
-function removeFromCart(id) {
-  cart = cart.filter(x=>x.id!==id);
-  updateCart();
+function clearCart(){cart=[];updateCartUI();document.getElementById('cart-modal').style.display='none';}
+
+function viewCart(){
+  const m=document.getElementById('cart-modal');
+  m.style.display=m.style.display==='block'?'none':'block';
+  renderCartItems();
 }
 
-function toggleCart() {
-  document.getElementById('cart-overlay').classList.toggle('open');
+function orderWhatsApp(){
+  if(cart.length===0){showToast('Cart khali hai!');return;}
+  const total=cart.reduce((s,i)=>s+i.price*i.qty,0);
+  let msg='Assalam o Alaikum! Masha Allah Paint Store se order karna chahta hun:\n\n';
+  cart.forEach(i=>{msg+=`• ${i.name} x${i.qty} = Rs. ${(i.price*i.qty).toLocaleString()}\n`;});
+  msg+=`\nKul Total: Rs. ${total.toLocaleString()}\n\nPlease confirm karain. Shukriya!`;
+  window.open('https://wa.me/923024746351?text='+encodeURIComponent(msg),'_blank');
 }
 
-function handleCartOverlay(e) {
-  if(e.target===document.getElementById('cart-overlay')) toggleCart();
+function showPage(page){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById(page+'-page').classList.add('active');
+  window.scrollTo(0,0);
+  if(page==='products')renderProducts(currentFilter);
 }
 
-function orderOnWhatsapp() {
-  if(cart.length===0) { showToast('Cart khali hai!', 'error'); return; }
-  let msg = 'Assalam o Alaikum! Main yeh order karna chahta hun:\n\n';
-  cart.forEach(i => { msg += `• ${i.name} (${i.qty} qty) — Rs. ${(i.priceMin*i.qty).toLocaleString()}\n`; });
-  const total = cart.reduce((s,i)=>s+(i.priceMin*i.qty),0);
-  msg += `\nTotal: Rs. ${total.toLocaleString()}`;
-  window.open('https://wa.me/923024746351?text='+encodeURIComponent(msg), '_blank');
+function showToast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg;t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),3000);
 }
 
-// ===== LOGIN =====
-function openLogin() {
-  document.getElementById('login-overlay').classList.add('open');
-}
-function closeLogin() {
-  document.getElementById('login-overlay').classList.remove('open');
-}
-function handleLoginOverlay(e) {
-  if(e.target===document.getElementById('login-overlay')) closeLogin();
-}
-function showSignup() {
-  document.getElementById('login-form-view').style.display='none';
-  document.getElementById('signup-form-view').style.display='block';
-}
-function showLogin() {
-  document.getElementById('signup-form-view').style.display='none';
-  document.getElementById('login-form-view').style.display='block';
-}
-function doLogin() {
-  const u = document.getElementById('login-user').value;
-  const p = document.getElementById('login-pass').value;
-  if(u==='admin' && p==='admin123') {
-    closeLogin();
-    openAdmin();
-    showToast('Admin login kamiyab! 🎉', 'success');
-  } else if(u && p) {
-    closeLogin();
-    showToast('Login kamiyab!', 'success');
-  } else {
-    showToast('Phone/email aur password zaroor bharen', 'error');
-  }
+function switchTab(tab){
+  document.getElementById('loginForm').style.display=tab==='login'?'block':'none';
+  document.getElementById('signupForm').style.display=tab==='signup'?'block':'none';
+  document.getElementById('loginTab').classList.toggle('active',tab==='login');
+  document.getElementById('signupTab').classList.toggle('active',tab==='signup');
 }
 
-// ===== ADMIN =====
-function openAdmin() {
-  document.getElementById('admin-overlay').classList.add('open');
-  renderAdminList();
-}
-function closeAdmin() {
-  document.getElementById('admin-overlay').classList.remove('open');
-}
-function adminTab(tab, btn) {
-  document.querySelectorAll('.admin-tab').forEach(b=>b.classList.remove('active'));
-  document.querySelectorAll('.admin-tab-pane').forEach(p=>p.classList.remove('active'));
-  btn.classList.add('active');
-  document.getElementById('tab-'+tab).classList.add('active');
-  if(tab==='list') renderAdminList();
-}
-
-function previewImage(input) {
-  const file = input.files[0];
-  if(!file) return;
-  const reader = new FileReader();
-  reader.onload = function(e) {
-    addImgData = e.target.result;
-    const preview = document.getElementById('img-preview');
-    preview.src = e.target.result;
-    preview.style.display = 'block';
-    document.getElementById('img-upload-text').style.display = 'none';
-  };
-  reader.readAsDataURL(file);
-}
-
-function previewImageUrl(input) {
-  if(input.value) {
-    addImgData = input.value;
-    const preview = document.getElementById('img-preview');
-    preview.src = input.value;
-    preview.style.display = 'block';
-    document.getElementById('img-upload-text').style.display = 'none';
-  }
-}
-
-function addProduct() {
-  const name = document.getElementById('ap-name').value.trim();
-  const brand = document.getElementById('ap-brand').value.trim();
-  const category = document.getElementById('ap-category').value;
-  const badge = document.getElementById('ap-badge').value.trim();
-  const priceMin = parseInt(document.getElementById('ap-price-min').value);
-  const priceMax = parseInt(document.getElementById('ap-price-max').value);
-  const desc = document.getElementById('ap-desc').value.trim();
-  const imgUrl = document.getElementById('ap-img-url').value.trim();
-
-  if(!name || !brand || !priceMin || !priceMax) {
-    showToast('Naam, brand, aur prices zaroor bharen!', 'error');
-    return;
-  }
-  const emojis = {interior:'🎨', exterior:'🌦️', enamel:'💎', primer:'🔆'};
-  const newProduct = {
-    id: nextId++,
-    name, brand, category, badge,
-    priceMin, priceMax, desc,
-    img: addImgData || imgUrl || '',
-    emoji: emojis[category] || '🎨'
-  };
-  products.push(newProduct);
-  saveProducts();
-  showToast(`"${name}" product add ho gaya!`, 'success');
-  // Reset form
-  ['ap-name','ap-brand','ap-badge','ap-price-min','ap-price-max','ap-desc','ap-img-url'].forEach(id => document.getElementById(id).value='');
-  document.getElementById('img-preview').style.display='none';
-  document.getElementById('img-upload-text').style.display='block';
-  addImgData = '';
-  renderAdminList();
-}
-
-function renderAdminList() {
-  const list = document.getElementById('admin-product-list');
-  if(products.length===0) {
-    list.innerHTML='<div style="text-align:center;color:var(--text-muted);padding:40px;">Koi product nahi — pehle add karein</div>';
-    return;
-  }
-  list.innerHTML = products.map(p=>`
-    <div class="admin-product-item">
-      <div class="admin-product-thumb">
-        ${p.img ? `<img src="${p.img}" alt="${p.name}" onerror="this.style.display='none';this.parentElement.innerHTML='${p.emoji||'🎨'}'">` : (p.emoji||'🎨')}
-      </div>
-      <div class="admin-product-meta">
-        <div class="admin-product-name">${p.name}</div>
-        <div class="admin-product-cat">${p.category}</div>
-        <div class="admin-product-price">Rs. ${p.priceMin.toLocaleString()} – ${p.priceMax.toLocaleString()}</div>
-      </div>
-      <div class="admin-product-actions">
-        <button class="btn-edit" onclick="openEdit(${p.id})">✏️ Edit</button>
-        <button class="btn-delete" onclick="deleteProduct(${p.id})">🗑️</button>
-      </div>
-    </div>
-  `).join('');
-}
-
-function deleteProduct(id) {
-  if(!confirm('Yeh product delete karna chahte hain?')) return;
-  products = products.filter(p=>p.id!==id);
-  saveProducts();
-  renderAdminList();
-  showToast('Product delete ho gaya', 'success');
-}
-
-function openEdit(id) {
-  const p = products.find(x=>x.id===id);
-  if(!p) return;
-  document.getElementById('edit-id').value = id;
-  document.getElementById('edit-name').value = p.name;
-  document.getElementById('edit-brand').value = p.brand;
-  document.getElementById('edit-category').value = p.category;
-  document.getElementById('edit-badge').value = p.badge||'';
-  document.getElementById('edit-price-min').value = p.priceMin;
-  document.getElementById('edit-price-max').value = p.priceMax;
-  document.getElementById('edit-desc').value = p.desc||'';
-  document.getElementById('edit-img-url').value = p.img||'';
-  currentEditImg = p.img||'';
-  const ep = document.getElementById('edit-img-preview');
-  if(p.img) { ep.src=p.img; ep.style.display='block'; }
-  else { ep.style.display='none'; }
-  document.getElementById('edit-overlay').classList.add('open');
-}
-
-function previewEditImage(input) {
-  const file = input.files[0];
-  if(!file) return;
-  const reader = new FileReader();
-  reader.onload = function(e) {
-    currentEditImg = e.target.result;
-    const preview = document.getElementById('edit-img-preview');
-    preview.src = e.target.result;
-    preview.style.display='block';
-  };
-  reader.readAsDataURL(file);
-}
-
-function saveEdit() {
-  const id = parseInt(document.getElementById('edit-id').value);
-  const p = products.find(x=>x.id===id);
-  if(!p) return;
-  p.name = document.getElementById('edit-name').value.trim();
-  p.brand = document.getElementById('edit-brand').value.trim();
-  p.category = document.getElementById('edit-category').value;
-  p.badge = document.getElementById('edit-badge').value.trim();
-  p.priceMin = parseInt(document.getElementById('edit-price-min').value)||p.priceMin;
-  p.priceMax = parseInt(document.getElementById('edit-price-max').value)||p.priceMax;
-  p.desc = document.getElementById('edit-desc').value.trim();
-  const urlVal = document.getElementById('edit-img-url').value.trim();
-  p.img = currentEditImg || urlVal || p.img;
-  saveProducts();
-  closeEdit();
-  renderAdminList();
-  renderProducts();
-  showToast(`"${p.name}" update ho gaya!`, 'success');
-}
-
-function closeEdit() {
-  document.getElementById('edit-overlay').classList.remove('open');
-}
-
-// ===== CONTACT =====
-function submitContact() {
-  showToast('Shukriya! Hum jald raabta karein ge.', 'success');
-}
-
-// ===== TOAST =====
-function showToast(msg, type='success') {
-  const t = document.getElementById('toast');
-  t.textContent = (type==='success'?'✅ ':'❌ ') + msg;
-  t.className = 'toast '+type;
-  t.classList.add('show');
-  setTimeout(()=>t.classList.remove('show'), 3000);
-}
-
-// ===== INIT =====
-renderProducts();
+function fakeLogin(){showToast('👋 Welcome back! Login ho gaye.');setTimeout(()=>showPage('hero'),1000);}
+function fakeSignup(){showToast('🎉 Account ban gaya! Welcome!');setTimeout(()=>showPage('hero'),1000);}
+renderProducts('all');
 </script>
 </body>
 </html>
