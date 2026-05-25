@@ -136,6 +136,7 @@ nav{position:fixed;top:0;width:100%;z-index:9999;background:rgba(255,255,255,0.9
 .cat-ov{position:absolute;bottom:0;left:0;right:0;padding:1.2rem;background:linear-gradient(to top,rgba(0,0,0,0.75),transparent)}
 .cat-name{font-size:0.95rem;font-weight:700;color:white;margin-bottom:2px}
 .cat-desc{font-size:0.72rem;color:rgba(255,255,255,0.8);line-height:1.4}
+@media(max-width:640px){.cats-grid{grid-template-columns:1fr 1fr}.cat-img{height:160px}}
 
 /* EXPERTISE */
 .exp-grid{display:grid;grid-template-columns:1fr 1fr;gap:3.5rem;align-items:center}
@@ -150,6 +151,7 @@ nav{position:fixed;top:0;width:100%;z-index:9999;background:rgba(255,255,255,0.9
 .exp-chk svg{width:12px;height:12px;stroke:#4F6AF5;fill:none;stroke-width:2.5}
 .exp-it{font-weight:600;font-size:0.9rem;margin-bottom:2px}
 .exp-is{font-size:0.8rem;color:#777;line-height:1.5}
+@media(max-width:768px){.exp-grid{grid-template-columns:1fr;gap:1.5rem}.exp-float{right:12px}}
 
 /* GALLERY */
 .gal-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;margin-top:2rem}
@@ -170,12 +172,15 @@ nav{position:fixed;top:0;width:100%;z-index:9999;background:rgba(255,255,255,0.9
 .rev-av{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.9rem;color:white;flex-shrink:0}
 .rev-nm{font-weight:600;font-size:0.85rem}
 .rev-rl{font-size:0.72rem;color:#888}
+@media(max-width:768px){.rev-grid{grid-template-columns:1fr}}
+@media(min-width:769px) and (max-width:1024px){.rev-grid{grid-template-columns:1fr 1fr}}
 
 /* CONTACT */
 .contact-dark{background:#0f172a;padding:4.5rem 1.5rem}
 .contact-dark h2{font-size:clamp(1.5rem,4vw,2rem);font-weight:800;color:white;text-align:center;margin-bottom:0.6rem}
 .contact-dark .csub{color:#94a3b8;text-align:center;font-size:0.88rem;margin-bottom:2.5rem}
 .cc-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;max-width:760px;margin:0 auto 2rem}
+@media(max-width:600px){.cc-grid{grid-template-columns:1fr}.pay-cards{grid-template-columns:1fr}}
 .cc{background:#1e293b;border-radius:13px;padding:1.6rem;border:1px solid #334155}
 .cc-ico{width:44px;height:44px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;margin-bottom:0.9rem}
 .cc h3{color:white;font-size:0.95rem;font-weight:700;margin-bottom:0.6rem}
@@ -349,7 +354,7 @@ footer span{color:#4F6AF5}
   </ul>
   <div class="nav-right">
     <button class="nav-btn nav-btn-dark" onclick="showPage('admin')">⚙ Admin</button>
-    <button class="nav-btn nav-btn-main" onclick="showPage('login')">Get a Quote</button>
+    <button class="nav-btn nav-btn-main" id="nav-user-btn" onclick="showPage('login')">Login</button>
   </div>
   <div class="hamburger" onclick="toggleMob()" id="ham">
     <span></span><span></span><span></span>
@@ -542,7 +547,7 @@ footer span{color:#4F6AF5}
     <div style="max-width:760px;margin:0 auto">
       <div style="font-size:0.65rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#64748b;text-align:center;margin-bottom:1rem">📍 HAMARE STORE KA LOCATION</div>
       <div style="border-radius:14px;overflow:hidden;border:1px solid #334155">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3491.123!2d71.0!3d29.5!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sBakhri+Uch+Sharif%2C+Punjab%2C+Pakistan!5e0!3m2!1sen!2s!4v1234567890" 
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3483.7!2d71.0053!3d29.6421!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x393b50000000001%3A0x0!2sUch+Sharif%2C+Bahawalpur%2C+Punjab%2C+Pakistan!5e0!3m2!1sen!2spk!4v1700000000000!5m2!1sen!2spk" 
           width="100%" height="260" style="border:0;display:block" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Masha Allah Paint Store Location"></iframe>
       </div>
       <p style="color:#475569;font-size:0.75rem;text-align:center;margin-top:0.7rem">Bakhri Chowk, P/O Nalka Adda, Bakhri Uch Sharif, Punjab, Pakistan</p>
@@ -697,7 +702,13 @@ footer span{color:#4F6AF5}
       </div>
       <!-- Step 2: Enter OTP -->
       <div id="forgot-step2" style="display:none">
-        <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:0.8rem;font-size:0.8rem;color:#166534;margin:1rem 0">✅ OTP aapke email pe bheja gaya!</div>
+        <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:0.8rem;font-size:0.8rem;color:#166534;margin:1rem 0">✅ OTP generate ho gaya!</div>
+        <!-- OTP Display (agar email setup na ho to yahan dikhe ga) -->
+        <div id="otp-display-wrap" style="background:#fef3c7;border:1px solid #f59e0b;border-radius:8px;padding:1rem;text-align:center;margin-bottom:1rem">
+          <div style="font-size:0.75rem;color:#92400e;margin-bottom:0.4rem">📋 Aapka OTP (copy karein):</div>
+          <div id="otp-display-box" style="font-size:2rem;font-weight:900;color:#b45309;letter-spacing:8px">------</div>
+          <div style="font-size:0.7rem;color:#92400e;margin-top:0.3rem">⏱ 10 minute valid — EmailJS setup hone ke baad email pe aayega</div>
+        </div>
         <div class="fg"><label>OTP Enter Karein</label><input type="text" id="otp-input" placeholder="6 digit OTP" maxlength="6" style="letter-spacing:4px;font-size:1.1rem;text-align:center;font-weight:700"></div>
         <div id="otp-err" style="color:#ef4444;font-size:0.78rem;margin-bottom:0.5rem;display:none">❌ Galat OTP!</div>
         <button class="login-btn" onclick="verifyOTP()">OTP Verify Karein ✓</button>
@@ -924,7 +935,7 @@ function showLogin(){
   document.getElementById('admin-forgot-form').style.display='none';
 }
 
-// ── Send OTP via EmailJS ──
+// ── Send OTP (Screen + optional EmailJS) ──
 function sendOTP(resend=false){
   const email = document.getElementById('forgot-email').value.trim();
   if(!resend && email !== adminEmail){
@@ -932,22 +943,28 @@ function sendOTP(resend=false){
     return;
   }
   document.getElementById('forgot-err').style.display='none';
-  // Generate 6-digit OTP
   currentOTP = Math.floor(100000 + Math.random() * 900000).toString();
   otpExpiry  = Date.now() + 10 * 60 * 1000; // 10 min
-  // Send via EmailJS (free service)
-  emailjs.send('service_mashallah','template_otp',{
-    to_email: adminEmail,
-    otp_code: currentOTP,
-    store_name: 'Masha Allah Paint Store'
-  }).then(()=>{
-    showToast('✅ OTP bheja gaya: '+adminEmail);
-  }).catch(()=>{
-    // Fallback: show OTP in toast for testing
-    showToast('OTP (test): '+currentOTP);
-  });
+
+  // EmailJS se try karo (agar setup ho)
+  if(typeof emailjs !== 'undefined'){
+    try{
+      emailjs.send('YOUR_SERVICE_ID','YOUR_TEMPLATE_ID',{
+        to_email: adminEmail,
+        otp_code: currentOTP,
+        store_name: 'Masha Allah Paint Store'
+      }).then(()=>{
+        showToast('✅ OTP email bheja gaya!');
+      }).catch(()=>{});
+    }catch(e){}
+  }
+
+  // Hamesha screen pe dikhaao (safe fallback)
   document.getElementById('forgot-step1').style.display='none';
   document.getElementById('forgot-step2').style.display='block';
+  // OTP screen pe bold dikhaao
+  const otpBox = document.getElementById('otp-display-box');
+  if(otpBox){ otpBox.textContent = currentOTP; otpBox.parentElement.style.display='block'; }
 }
 
 // ── Verify OTP ──
@@ -1198,10 +1215,58 @@ async function submitContact(){
   btn.textContent='Message Bhejein ✉️';btn.disabled=false;
 }
 
-function fakeLogin(){showToast('👋 Login ho gaye!');setTimeout(()=>showPage('hero'),800);}
-function fakeSignup(){showToast('🎉 Account ban gaya!');setTimeout(()=>showPage('hero'),800);}
+// ── REAL LOGIN / SIGNUP (localStorage based) ──────────────────────
+function fakeLogin(){
+  const id = document.querySelector('#loginForm input[type="text"]').value.trim();
+  const pw = document.querySelector('#loginForm input[type="password"]').value;
+  if(!id||!pw){showToast('⚠️ Phone/Email aur Password zaroor bharein!');return;}
+  const users = JSON.parse(localStorage.getItem('ma_users')||'[]');
+  const found = users.find(u=>u.id===id && u.pw===pw);
+  if(found){
+    localStorage.setItem('ma_loggedIn', JSON.stringify({name:found.name, id:found.id}));
+    showToast('👋 Login ho gaye, '+found.name+'!');
+    updateNavUser();
+    setTimeout(()=>showPage('hero'),800);
+  } else {
+    showToast('❌ Galat phone/email ya password!');
+  }
+}
+function fakeSignup(){
+  const inputs = document.querySelectorAll('#signupForm input');
+  const name  = inputs[0]?.value.trim();
+  const phone = inputs[1]?.value.trim();
+  const pw    = inputs[2]?.value;
+  if(!name||!phone||!pw){showToast('⚠️ Sab fields bharein!');return;}
+  if(pw.length<6){showToast('⚠️ Password 6 characters se zyada hona chahiye!');return;}
+  const users = JSON.parse(localStorage.getItem('ma_users')||'[]');
+  if(users.find(u=>u.id===phone)){showToast('⚠️ Ye number already registered hai!');return;}
+  users.push({name, id:phone, pw});
+  localStorage.setItem('ma_users', JSON.stringify(users));
+  localStorage.setItem('ma_loggedIn', JSON.stringify({name, id:phone}));
+  showToast('🎉 Account ban gaya! Welcome, '+name+'!');
+  updateNavUser();
+  setTimeout(()=>showPage('hero'),800);
+}
+function logoutUser(){
+  localStorage.removeItem('ma_loggedIn');
+  showToast('👋 Logout ho gaye!');
+  updateNavUser();
+}
+function updateNavUser(){
+  const u  = JSON.parse(localStorage.getItem('ma_loggedIn')||'null');
+  const el = document.getElementById('nav-user-btn');
+  if(!el) return;
+  if(u){
+    el.textContent = '👤 '+u.name.split(' ')[0];
+    el.onclick = logoutUser;
+  } else {
+    el.textContent = 'Login';
+    el.onclick = ()=>showPage('login');
+  }
+}
 
 renderFeatured();
+updateNavUser();
 </script>
 
 <!-- FLOATING WHATSAPP BUTTON -->
