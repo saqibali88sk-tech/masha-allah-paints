@@ -18,6 +18,14 @@
 <meta name="twitter:description" content="Original Gobis & Diamond Paints. Home delivery available. 0302-4746351">
 <link rel="canonical" href="https://saqibali88sk-tech.github.io/masha-allah-paints/">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>
+  (function(){
+    // EmailJS initialize — free account banao: emailjs.com
+    // Apna Public Key dalo neeche
+    if(typeof emailjs !== 'undefined') emailjs.init('YOUR_PUBLIC_KEY');
+  })();
+</script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -661,7 +669,9 @@ footer span{color:#4F6AF5}
 <!-- ═══ ADMIN ═══ -->
 <div id="admin-page" class="page">
   <div class="admin-login-outer" id="admin-login-screen">
-    <div class="admin-login-box">
+
+    <!-- LOGIN FORM -->
+    <div class="admin-login-box" id="admin-login-form">
       <div style="text-align:center;font-size:2.5rem;margin-bottom:0.5rem">⚙️</div>
       <h2>Admin Portal</h2>
       <p>Masha Allah Paint Store — Sirf authorized access</p>
@@ -669,7 +679,43 @@ footer span{color:#4F6AF5}
       <div class="fg"><label>Password</label><input type="password" id="admin-pw" placeholder="Password likhein" onkeydown="if(event.key==='Enter')adminLogin()"></div>
       <div id="admin-err" style="color:#ef4444;font-size:0.78rem;margin-bottom:0.5rem;display:none">❌ Galat username ya password!</div>
       <button class="login-btn" onclick="adminLogin()">Admin Login</button>
+      <div style="text-align:center;margin-top:1rem">
+        <button onclick="showForgot()" style="background:none;border:none;color:#4F6AF5;font-size:0.82rem;cursor:pointer;font-family:'Inter',sans-serif">🔑 Password bhool gaye?</button>
+      </div>
     </div>
+
+    <!-- FORGOT PASSWORD FORM -->
+    <div class="admin-login-box" id="admin-forgot-form" style="display:none">
+      <div style="text-align:center;font-size:2.5rem;margin-bottom:0.5rem">📧</div>
+      <h2>Password Reset</h2>
+      <p>Recovery email likhein — OTP bheja jaega</p>
+      <!-- Step 1: Enter Email -->
+      <div id="forgot-step1">
+        <div class="fg" style="margin-top:1.5rem"><label>Recovery Email</label><input type="email" id="forgot-email" placeholder="apka@email.com"></div>
+        <div id="forgot-err" style="color:#ef4444;font-size:0.78rem;margin-bottom:0.5rem;display:none">❌ Email match nahi hua!</div>
+        <button class="login-btn" onclick="sendOTP()">OTP Bhejo 📨</button>
+      </div>
+      <!-- Step 2: Enter OTP -->
+      <div id="forgot-step2" style="display:none">
+        <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:0.8rem;font-size:0.8rem;color:#166534;margin:1rem 0">✅ OTP aapke email pe bheja gaya!</div>
+        <div class="fg"><label>OTP Enter Karein</label><input type="text" id="otp-input" placeholder="6 digit OTP" maxlength="6" style="letter-spacing:4px;font-size:1.1rem;text-align:center;font-weight:700"></div>
+        <div id="otp-err" style="color:#ef4444;font-size:0.78rem;margin-bottom:0.5rem;display:none">❌ Galat OTP!</div>
+        <button class="login-btn" onclick="verifyOTP()">OTP Verify Karein ✓</button>
+        <div style="text-align:center;margin-top:0.7rem"><button onclick="sendOTP(true)" style="background:none;border:none;color:#888;font-size:0.78rem;cursor:pointer;font-family:'Inter',sans-serif">OTP dobara bhejo</button></div>
+      </div>
+      <!-- Step 3: New Password -->
+      <div id="forgot-step3" style="display:none">
+        <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:0.8rem;font-size:0.8rem;color:#166534;margin:1rem 0">✅ OTP verify ho gaya! Naya password set karein.</div>
+        <div class="fg"><label>Naya Password</label><input type="password" id="new-pw1" placeholder="Naya password likhein"></div>
+        <div class="fg"><label>Confirm Password</label><input type="password" id="new-pw2" placeholder="Dobara likhein"></div>
+        <div id="pw-err" style="color:#ef4444;font-size:0.78rem;margin-bottom:0.5rem;display:none">❌ Passwords match nahi karte!</div>
+        <button class="login-btn" onclick="resetPassword()">Password Reset Karein 🔒</button>
+      </div>
+      <div style="text-align:center;margin-top:1rem">
+        <button onclick="showLogin()" style="background:none;border:none;color:#888;font-size:0.82rem;cursor:pointer;font-family:'Inter',sans-serif">← Wapas Login pe</button>
+      </div>
+    </div>
+
   </div>
   <div id="admin-panel-screen" style="display:none">
     <div class="admin-panel">
@@ -678,8 +724,27 @@ footer span{color:#4F6AF5}
           <h2>⚙ Admin Panel</h2>
           <div style="font-size:0.72rem;color:#94a3b8;margin-top:2px">Masha Allah Paint Store</div>
         </div>
-        <button onclick="adminLogout()" style="background:#334155;color:#94a3b8;border:none;padding:0.45rem 0.9rem;border-radius:6px;cursor:pointer;font-size:0.8rem;font-family:'Inter',sans-serif">Logout</button>
+        <div style="display:flex;gap:6px;flex-wrap:wrap">
+          <button onclick="showChangePw()" style="background:#1e3a5f;color:#93c5fd;border:none;padding:0.45rem 0.9rem;border-radius:6px;cursor:pointer;font-size:0.8rem;font-family:'Inter',sans-serif">🔑 Password</button>
+          <button onclick="adminLogout()" style="background:#334155;color:#94a3b8;border:none;padding:0.45rem 0.9rem;border-radius:6px;cursor:pointer;font-size:0.8rem;font-family:'Inter',sans-serif">Logout</button>
+        </div>
       </div>
+      <!-- CHANGE PASSWORD MODAL -->
+      <div id="changepw-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:99999;display:none;align-items:center;justify-content:center">
+        <div style="background:white;border-radius:16px;padding:2rem;width:90%;max-width:360px;box-shadow:0 20px 60px rgba(0,0,0,0.3)">
+          <h3 style="font-size:1.1rem;font-weight:800;margin-bottom:0.3rem">🔑 Password Change Karein</h3>
+          <p style="color:#888;font-size:0.78rem;margin-bottom:1.2rem">Naya password set karein</p>
+          <div class="fg"><label>Purana Password</label><input type="password" id="cp-old" placeholder="Purana password"></div>
+          <div class="fg"><label>Naya Password</label><input type="password" id="cp-new1" placeholder="Naya password"></div>
+          <div class="fg"><label>Confirm Password</label><input type="password" id="cp-new2" placeholder="Dobara likhein"></div>
+          <div id="cp-err" style="color:#ef4444;font-size:0.78rem;margin-bottom:0.7rem;display:none"></div>
+          <div style="display:flex;gap:8px">
+            <button onclick="changePassword()" style="flex:1;background:#4F6AF5;color:white;border:none;padding:0.7rem;border-radius:7px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif">Save ✓</button>
+            <button onclick="document.getElementById('changepw-modal').style.display='none'" style="flex:1;background:#f1f5f9;color:#555;border:none;padding:0.7rem;border-radius:7px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif">Cancel</button>
+          </div>
+        </div>
+      </div>
+
       <div class="admin-stats">
         <div class="astat"><div class="astat-n" id="st-total">0</div><div class="astat-l">Total Products</div></div>
         <div class="astat"><div class="astat-n" id="st-gobis">0</div><div class="astat-l">Gobi's</div></div>
@@ -833,17 +898,141 @@ function orderWA(){
   window.open('https://wa.me/923024746351?text='+encodeURIComponent(msg),'_blank');
 }
 
+// ══════════════════════════════════
+// ADMIN AUTH SYSTEM
+// ══════════════════════════════════
+// Default: admin / kashif123
+// Recovery Email: set karo neeche
+let adminPassword = localStorage.getItem('admin_pw') || 'kashif123';
+let adminEmail    = localStorage.getItem('admin_email') || 'info@mashallahpaints.pk';
+let currentOTP    = '';
+let otpExpiry     = 0;
+
+// ── Login ──
 // ADMIN LOGIN — Username: admin | Password: kashif123
-async function adminLogin(){
+// ── Navigation ──
+function showForgot(){
+  document.getElementById('admin-login-form').style.display='none';
+  document.getElementById('admin-forgot-form').style.display='block';
+  document.getElementById('forgot-step1').style.display='block';
+  document.getElementById('forgot-step2').style.display='none';
+  document.getElementById('forgot-step3').style.display='none';
+  document.getElementById('forgot-err').style.display='none';
+}
+function showLogin(){
+  document.getElementById('admin-login-form').style.display='block';
+  document.getElementById('admin-forgot-form').style.display='none';
+}
+
+// ── Send OTP via EmailJS ──
+function sendOTP(resend=false){
+  const email = document.getElementById('forgot-email').value.trim();
+  if(!resend && email !== adminEmail){
+    document.getElementById('forgot-err').style.display='block';
+    return;
+  }
+  document.getElementById('forgot-err').style.display='none';
+  // Generate 6-digit OTP
+  currentOTP = Math.floor(100000 + Math.random() * 900000).toString();
+  otpExpiry  = Date.now() + 10 * 60 * 1000; // 10 min
+  // Send via EmailJS (free service)
+  emailjs.send('service_mashallah','template_otp',{
+    to_email: adminEmail,
+    otp_code: currentOTP,
+    store_name: 'Masha Allah Paint Store'
+  }).then(()=>{
+    showToast('✅ OTP bheja gaya: '+adminEmail);
+  }).catch(()=>{
+    // Fallback: show OTP in toast for testing
+    showToast('OTP (test): '+currentOTP);
+  });
+  document.getElementById('forgot-step1').style.display='none';
+  document.getElementById('forgot-step2').style.display='block';
+}
+
+// ── Verify OTP ──
+function verifyOTP(){
+  const entered = document.getElementById('otp-input').value.trim();
+  if(Date.now() > otpExpiry){
+    document.getElementById('otp-err').textContent='❌ OTP expire ho gaya! Dobara bhejo.';
+    document.getElementById('otp-err').style.display='block';
+    return;
+  }
+  if(entered !== currentOTP){
+    document.getElementById('otp-err').style.display='block';
+    return;
+  }
+  document.getElementById('otp-err').style.display='none';
+  document.getElementById('forgot-step2').style.display='none';
+  document.getElementById('forgot-step3').style.display='block';
+}
+
+// ── Reset Password ──
+function resetPassword(){
+  const p1=document.getElementById('new-pw1').value;
+  const p2=document.getElementById('new-pw2').value;
+  if(p1.length < 6){
+    document.getElementById('pw-err').textContent='❌ Password kam az kam 6 characters ka hona chahiye!';
+    document.getElementById('pw-err').style.display='block';
+    return;
+  }
+  if(p1 !== p2){
+    document.getElementById('pw-err').textContent='❌ Passwords match nahi karte!';
+    document.getElementById('pw-err').style.display='block';
+    return;
+  }
+  adminPassword = p1;
+  localStorage.setItem('admin_pw', p1);
+  showToast('✅ Password reset ho gaya! Naye password se login karein.');
+  showLogin();
+  currentOTP='';
+}
+
+// ── Change Password (from panel) ──
+function showChangePw(){
+  document.getElementById('changepw-modal').style.display='flex';
+  document.getElementById('cp-old').value='';
+  document.getElementById('cp-new1').value='';
+  document.getElementById('cp-new2').value='';
+  document.getElementById('cp-err').style.display='none';
+}
+function changePassword(){
+  const old=document.getElementById('cp-old').value;
+  const n1=document.getElementById('cp-new1').value;
+  const n2=document.getElementById('cp-new2').value;
+  const err=document.getElementById('cp-err');
+  if(old !== adminPassword){
+    err.textContent='❌ Purana password galat hai!';
+    err.style.display='block';return;
+  }
+  if(n1.length < 6){
+    err.textContent='❌ Password 6+ characters ka hona chahiye!';
+    err.style.display='block';return;
+  }
+  if(n1 !== n2){
+    err.textContent='❌ Naye passwords match nahi karte!';
+    err.style.display='block';return;
+  }
+  adminPassword=n1;
+  localStorage.setItem('admin_pw',n1);
+  document.getElementById('changepw-modal').style.display='none';
+  showToast('✅ Password change ho gaya!');
+}
+
+// ── Set Recovery Email (from panel) ──
+function setRecoveryEmail(){
+  const e=document.getElementById('recovery-email-inp').value.trim();
+  if(!e||!e.includes('@')){showToast('❌ Sahi email likhein!');return;}
+  adminEmail=e;
+  localStorage.setItem('admin_email',e);
+  showToast('✅ Recovery email save ho gayi: '+e);
+}
+
+function adminLogin(){
   const u=document.getElementById('admin-user').value.trim();
   const p=document.getElementById('admin-pw').value;
   const err=document.getElementById('admin-err');
-  // Hash password before comparing (SHA-256)
-  const enc=new TextEncoder().encode(p);
-  const buf=await crypto.subtle.digest('SHA-256',enc);
-  const hash=Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
-  const validHash='a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3'; // kashif123
-  if(u==='admin'&&hash===validHash){
+  if(u==='admin'&&p===adminPassword){
     err.style.display='none';
     document.getElementById('admin-login-screen').style.display='none';
     document.getElementById('admin-panel-screen').style.display='block';
@@ -861,6 +1050,11 @@ function adminLogout(){
   document.getElementById('admin-pw').value='';
 }
 function updateAdminStats(){
+  // Show current recovery email
+  const el = document.getElementById('cur-email-val');
+  const inp = document.getElementById('recovery-email-inp');
+  if(el) el.textContent = adminEmail;
+  if(inp) inp.value = adminEmail;
   document.getElementById('st-total').textContent=products.length;
   document.getElementById('st-gobis').textContent=products.filter(p=>p.cat==='gobis').length;
   document.getElementById('st-diamond').textContent=products.filter(p=>p.cat==='diamond').length;
