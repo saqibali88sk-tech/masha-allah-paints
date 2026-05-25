@@ -66,23 +66,131 @@ nav{position:fixed;top:0;width:100%;z-index:9999;background:rgba(255,255,255,0.9
 .page{display:none;padding-top:64px;min-height:100vh}
 .page.active{display:block}
 
-/* HERO */
-.hero{min-height:88vh;position:relative;display:flex;align-items:center;overflow:hidden}
-.hero-bg{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1562259929-b4e1fd3aef09?w=1400&q=80') center/cover no-repeat}
-.hero-ov{position:absolute;inset:0;background:linear-gradient(to right,rgba(255,255,255,0.97) 50%,rgba(255,255,255,0.2) 100%)}
-.hero-cnt{position:relative;z-index:2;padding:3rem 1.5rem;max-width:600px}
-.badge{display:inline-flex;align-items:center;gap:6px;background:#EEF2FF;color:#4F6AF5;font-size:0.72rem;font-weight:600;padding:0.3rem 0.9rem;border-radius:999px;margin-bottom:1.3rem;border:1px solid #C7D2FE}
-.hero-title{font-size:clamp(2.2rem,6vw,4rem);font-weight:900;line-height:1.1;margin-bottom:1rem}
-.c-blue{color:#4F6AF5}.c-purple{color:#7C3AED}
-.hero-desc{font-size:0.93rem;color:#555;line-height:1.8;margin-bottom:2rem;max-width:440px}
-.btn-row{display:flex;gap:0.8rem;flex-wrap:wrap}
-.btn-primary{background:#4F6AF5;color:white;border:none;padding:0.75rem 1.6rem;border-radius:9px;font-size:0.9rem;font-family:'Inter',sans-serif;cursor:pointer;font-weight:600;transition:all 0.2s}
-.btn-primary:hover{background:#3d58e0;transform:translateY(-2px)}
-.btn-outline{background:transparent;color:#1a1a2e;border:1.5px solid #ddd;padding:0.75rem 1.6rem;border-radius:9px;font-size:0.9rem;font-family:'Inter',sans-serif;cursor:pointer;font-weight:500;transition:all 0.2s}
-.btn-outline:hover{border-color:#4F6AF5;color:#4F6AF5}
-.stats-row{display:flex;gap:1.5rem;margin-top:2.5rem;padding-top:1.8rem;border-top:1px solid #f0f0f0;flex-wrap:wrap}
-.stat-n{font-size:1.6rem;font-weight:800;color:#4F6AF5}
-.stat-l{font-size:0.72rem;color:#888;margin-top:2px}
+
+/* PREMIUM HERO */
+.hero{
+  min-height:100vh;
+  position:relative;
+  display:flex;
+  align-items:center;
+  overflow:hidden;
+  background:#050816;
+}
+
+.hero-bg{
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(rgba(5,8,22,0.82),rgba(5,8,22,0.88)),
+    url('https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=1600&q=80') center/cover no-repeat;
+  transform:scale(1.05);
+}
+
+.hero::before{
+  content:'';
+  position:absolute;
+  width:520px;
+  height:520px;
+  border-radius:50%;
+  background:rgba(79,106,245,0.18);
+  filter:blur(120px);
+  top:-140px;
+  right:-120px;
+}
+
+.hero::after{
+  content:'';
+  position:absolute;
+  width:420px;
+  height:420px;
+  border-radius:50%;
+  background:rgba(124,58,237,0.15);
+  filter:blur(120px);
+  bottom:-140px;
+  left:-120px;
+}
+
+.hero-ov{
+  position:absolute;
+  inset:0;
+  background:linear-gradient(to right,rgba(5,8,22,0.96) 45%,rgba(5,8,22,0.55) 100%);
+}
+
+.hero-cnt{
+  position:relative;
+  z-index:5;
+  padding:3rem 1.5rem;
+  max-width:760px;
+}
+
+.badge{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  background:rgba(255,255,255,0.08);
+  border:1px solid rgba(255,255,255,0.12);
+  backdrop-filter:blur(12px);
+  color:#dbeafe;
+  font-size:0.78rem;
+  font-weight:700;
+  padding:0.55rem 1rem;
+  border-radius:999px;
+  margin-bottom:1.4rem;
+}
+
+.hero-title{
+  font-size:clamp(2.7rem,7vw,5.6rem);
+  font-weight:900;
+  line-height:1;
+  margin-bottom:1.2rem;
+  color:white;
+}
+
+.hero-title span{
+  background:linear-gradient(135deg,#4F6AF5,#8B5CF6,#38BDF8);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+.hero-desc{
+  font-size:1rem;
+  color:#cbd5e1;
+  line-height:1.9;
+  margin-bottom:2rem;
+  max-width:620px;
+}
+
+.hero-tags{
+  display:flex;
+  flex-wrap:wrap;
+  gap:0.8rem;
+  margin-top:2rem;
+}
+
+.hero-tag{
+  padding:0.7rem 1rem;
+  border-radius:12px;
+  background:rgba(255,255,255,0.06);
+  border:1px solid rgba(255,255,255,0.08);
+  color:#e2e8f0;
+  font-size:0.8rem;
+  font-weight:600;
+}
+
+.stats-row{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:1rem;
+  margin-top:2.5rem;
+}
+
+.stats-row div{
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(255,255,255,0.08);
+  border-radius:16px;
+  padding:1.1rem;
+}
+
 
 /* BRANDS */
 .brands{padding:2rem 1.5rem;background:#fafafa;border-top:1px solid #f0f0f0;border-bottom:1px solid #f0f0f0;text-align:center}
@@ -380,24 +488,63 @@ footer span{color:#4F6AF5}
 
 <!-- ═══ HOME ═══ -->
 <div id="hero-page" class="page active">
-  <section class="hero">
-    <div class="hero-bg"></div>
-    <div class="hero-ov"></div>
-    <div class="hero-cnt">
-      <div class="badge">⭐ Premium Quality Paints</div>
-      <h1 class="hero-title">Bring Your<br><span class="c-blue">Vision</span> <span class="c-purple">to Life.</span></h1>
-      <p class="hero-desc">Masha Allah Paint Store — premium decorative coatings, industrial finishes, aur expert color matching ka ek maqam.</p>
-      <div class="btn-row">
-        <button class="btn-primary" onclick="showPage('products')">Products Dekhein →</button>
-        <button class="btn-outline" onclick="navScroll('contact-sec')">Quote Lein</button>
+  
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-ov"></div>
+
+  <div class="hero-cnt">
+
+    <div class="badge">
+      ✨ Premium Paint Experts — Bakhri Uch Sharif
+    </div>
+
+    <h1 class="hero-title">
+      Luxury Colors For<br>
+      <span>Modern Spaces.</span>
+    </h1>
+
+    <p class="hero-desc">
+      Masha Allah Paint Store brings premium decorative coatings, luxury wall finishes, weather protection aur expert color solutions for homes, villas aur commercial projects.
+    </p>
+
+    <div class="btn-row">
+      <button class="btn-primary" onclick="showPage('products')">
+        Explore Products →
+      </button>
+
+      <button class="btn-outline" onclick="navScroll('contact-sec')">
+        Get Free Color Advice
+      </button>
+    </div>
+
+    <div class="hero-tags">
+      <div class="hero-tag">🎨 5000+ Premium Shades</div>
+      <div class="hero-tag">🏆 Trusted Since 2012</div>
+      <div class="hero-tag">🚚 Fast Home Delivery</div>
+      <div class="hero-tag">✅ Original Gobis & Diamond Paints</div>
+    </div>
+
+    <div class="stats-row">
+      <div>
+        <div class="stat-n">10+</div>
+        <div class="stat-l">Years Experience</div>
       </div>
-      <div class="stats-row">
-        <div><div class="stat-n">500+</div><div class="stat-l">Paint Colors</div></div>
-        <div><div class="stat-n">10yr+</div><div class="stat-l">Experience</div></div>
-        <div><div class="stat-n">1k+</div><div class="stat-l">Customers</div></div>
+
+      <div>
+        <div class="stat-n">1K+</div>
+        <div class="stat-l">Happy Customers</div>
+      </div>
+
+      <div>
+        <div class="stat-n">5000+</div>
+        <div class="stat-l">Luxury Color Shades</div>
       </div>
     </div>
-  </section>
+
+  </div>
+</section>
+
 
   <!-- BRANDS -->
   <div class="brands">
